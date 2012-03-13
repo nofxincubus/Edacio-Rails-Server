@@ -52,7 +52,7 @@ function initialize(){
 	document.addEventListener("touchend",	onMU, false);
 	document.addEventListener("touchmove",	onMM, false);
 	
-	h = window.innerHeight - 200;
+	h = window.innerHeight - 190;
 	w = window.innerWidth - 20;
 	hw=w/2;
 	hh = h - 300;
@@ -109,7 +109,7 @@ function onMD(e){
 	var xM = mouseX(e);
 	var yM = mouseY(e);
 	var ymHeight = mapui.height;
-	if (mapui.selectedNode != 0 && xM < 390 && xM > 180  && yM > 33 && yM < ymHeight){
+	if (mapui.selectedNode != 0 && xM < 391 && xM > 181  && yM > -10 && yM < ymHeight+5){
 		
 	} else {
 	selectedNode = mapui.SetDragged	(mouseX(e), mouseY(e));
@@ -170,8 +170,8 @@ function onMU(e){
 function mouseX(e)
 {
 	var cx;
-	if(e.type === "touchstart" || e.type === "touchmove") cx = e.touches.item(0).clientX-202;
-	else cx = e.clientX-202;
+	if(e.type === "touchstart" || e.type === "touchmove") cx = e.touches.item(0).clientX;
+	else cx = e.clientX;
 	return (cx);
 }
 function mouseY(e)

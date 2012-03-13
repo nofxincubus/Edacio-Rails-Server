@@ -1,6 +1,13 @@
 @charset "utf-8";
 /* CSS Document */
 
+#svgc {
+position:absolute;
+top:40px;
+left:0px;
+height:595px;
+}
+
 #footer {
 	position:absolute;
 	bottom:0px;

@@ -13,7 +13,7 @@ function MapUI(w, h,csvg){
 	this.layerlevel = 0;
 	this.sizeConstraint = 0.45;
 	this.circleRadius = h*this.sizeConstraint;
-	this.centerx = w/2 - 10-200;
+	this.centerx = w/2 - 10;
 	this.centery = this.circleRadius + 20;
 	this.stable = true;
 	//this.width = (window.innerWidth-20)*0.5;	
