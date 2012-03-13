@@ -8,10 +8,13 @@
 #  created_at :datetime        not null
 #  updated_at :datetime        not null
 #
+# Probably weird to do it this way but it should only have one profile for each user
 
 class User < ActiveRecord::Base
   attr_accessible :username, :email, :password, :password_confirmation
   has_secure_password
+  has_many :profile
+
   before_save :create_remember_token
   validates :username, presence: true , length: { maximum: 30 },
                        uniqueness: {case_sensitive: true}

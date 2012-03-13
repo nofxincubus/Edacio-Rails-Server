@@ -10,7 +10,7 @@ html {
 
 body {
   padding-top: 60px;
-  background-color:#c3c7ff;
+  background-color:#CCCCCC;
 }
 
 section {
@@ -36,6 +36,12 @@ $grayMediumLight: #eaeaea;
   -webkit-box-sizing: border-box; 
   box-sizing: border-box;
 }
+
+/* Front Page */
+#integrationfront {
+  border-radius: 20px;
+}
+
 
 /* typography */
 
@@ -160,3 +166,16 @@ input, textarea, select, .uneditable-input {
   @extend .control-group;
   @extend .error;
  }
+
+/* novi slider */
+
+.theme-default #slider {
+    margin:20px auto 0 auto;
+    width:600px; /* Make sure your images are the same size */
+    height:400px; /* Make sure your images are the same size */
+}
+
+.theme-pascal.slider-wrapper,
+.theme-orman.slider-wrapper {
+    margin-top:150px;
+}

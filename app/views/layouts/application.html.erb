@@ -6,8 +6,13 @@
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
   <%= render 'layouts/shim' %>
+  <script type="text/javascript" src="http://platform.linkedin.com/in.js">
+		  api_key: kd55r8vt584t
+		  onLoad: onLinkedInLoad
+		  authorize: true
+		</script>
 </head>
-<body>
+<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" onLoad="initialize()" ondragover="allowDrop(event)" ondrop="drop(event)" onClick="onMD(event)">
 
    <%= render 'layouts/header' %>
     <div class="container">
@@ -15,8 +20,13 @@
         <div class="alert alert-<%= key %>"><%= value %></div>
       <% end %>
       <%= yield %>
-      <%= render 'layouts/footer' %>
-      <%= debug(params) if Rails.env.development? %>
+        <% if signed_in? %>
+		  <% else %>
+ 		  <%= render 'layouts/footer' %>
+		  <% end %>
+
+
+    <!--  <%= debug(params) if Rails.env.development? %>-->
     </div>
 
 </body>
