@@ -3,7 +3,6 @@
         <div class="container">
           <%= link_to image_tag("logo.png", alt: "Edacio"), 'http://www.edacio.com', id: "logoimg" %>
           <%= link_to "| Social Fitness Trainer", '#', id: "logo" %>
-           <script type="IN/Login" data-onAuth="onLinkedInLoad"></script>
           <nav>
             <ul class="nav pull-right">
               <li><%= link_to "Home",    root_path %></li>
@@ -25,10 +24,12 @@
 				          </li>
 				        </ul>
 				      </li>
+						<li><script type="IN/Login" data-onAuth="onLinkedInLoad"></script></li>
 				    <% else %>
 				      <li><%= link_to "Sign in", signin_path %></li>
                   <li><%= link_to "Signup", signup_path %></li>
 				    <% end %>
+						
             </ul>
           </nav>
         </div>
