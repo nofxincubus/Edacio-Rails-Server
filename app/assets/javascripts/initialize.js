@@ -20,7 +20,7 @@ function el(s)
 	return document.getElementById(s);
 }
 
-function initialize(){
+function initialize_later(){
 	//site Initialization
 	document.body.setAttribute("height",window.innerHeight);
 	//el('footer1').setAttribute("style",'background:#6CF; height:' + window.innerHeight*0.25);

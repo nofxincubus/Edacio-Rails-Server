@@ -1,12 +1,12 @@
 // LinkedinHandler Class
 // Included headlines, locations, and current status
 
-function onLinkedInLoad() {
+function onLinkedInLoad_1() {
 	IN.Event.on(IN, "auth", function() {onLinkedInLogin();});
 	IN.Event.on(IN, "logout", function() {onLinkedInLogout();});
 }
 	
-function onLinkedInLogin(){
+function onLinkedInLogin_1(){
 	IN.API.Connections("me")
 	.fields("id", "firstName", "lastName", "pictureUrl", "publicProfileUrl","currentShare","headline","location")
 	.result(function(result, metadata) {
