@@ -34,7 +34,10 @@ end
 
 group :production do
   gem 'therubyracer', '~> 0.9.3.beta1'
-  gem 'pg', '0.12.2'
+  gem 'pg',           '0.12.2'
+  gem 'hashie',        '1.2.0'
+  gem 'multi_json',   '~> 1.0.3'
+  gem 'linkedin',     '0.3.6'
 end
 
 
