@@ -3,24 +3,6 @@
 
 <div class="row">
   <h3> Sign in with Linked In </h3>
-  <script type="IN/Login" data-onAuth="onLinkedInLoad"></script>
+  <%= oauth_login_button :value => "Login", :class => 'linkedin' %>
 </div>
-<div class="row">
-  <div class="span6 offset3">
-	<%= form_for(@profile) do |f| %>
-	  <%= render 'shared/error_messages', object: f.object %>
 
-	  <div class="field">
-		<%= f.label :name %>
-      <%= f.text_field :name %>
-
-      <%= f.label :title %>
-      <%= f.text_field :title %>
-
-      <%= f.label :location %>
-      <%= f.text_field :location %>
-	  </div>
-	  <%= f.submit "Update me", class: "btn btn-large btn-primary" %>
-	<% end %>
-  </div>
-</div>

@@ -5,6 +5,9 @@ gem 'bootstrap-sass','2.0.0'
 gem 'bcrypt-ruby', '3.0.1'
 gem 'oauth', '0.4.5'
 gem 'json', '1.6.5'
+gem 'hashie',        '1.2.0'
+gem 'multi_json',   '~> 1.0.3'
+gem 'linkedin',     '0.3.6', :require =>'linkedin'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -35,9 +38,6 @@ end
 group :production do
   gem 'therubyracer', '~> 0.9.3.beta1'
   gem 'pg',           '0.12.2'
-  gem 'hashie',        '1.2.0'
-  gem 'multi_json',   '~> 1.0.3'
-  gem 'linkedin',     '0.3.6'
 end
 
 

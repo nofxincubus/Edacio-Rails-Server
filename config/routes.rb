@@ -1,6 +1,6 @@
 Edacioserver::Application.routes.draw do
   
-  resources :users
+  resources :users, only: [:new, :show]
   resources :sessions, only: [:new, :create, :destroy]
 
   root to: 'static_pages#home'
@@ -11,7 +11,9 @@ Edacioserver::Application.routes.draw do
   match '/news', to: 'static_pages#news'
   match '/signup', to: 'users#new'
   match '/signin',  to: 'sessions#new'
-  match '/first',  to: 'sessions#first'
+  match '/first',  to: 'users#first'
+  match '/auth',  to: 'linkauth#index'
+  match '/auth/callback',  to: 'linkauth#callback'
   match '/signout', to: 'sessions#destroy', via: :delete
   match '/', to: 'static_pages#home'
   # The priority is based upon order of creation:
