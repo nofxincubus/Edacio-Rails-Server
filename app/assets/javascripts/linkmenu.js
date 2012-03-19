@@ -107,12 +107,12 @@ LinkMenu.prototype.initialize = function() {
 	Developers
 	Designers
 	*/
-	this.pics.push("company.png");
-	this.pics.push("investor.png");
-	this.pics.push("artist.png");
-	this.pics.push("programmer.png");
-	this.pics.push("blankcategory.png");
-	this.pics.push("blankcontact.png");
+	this.pics.push("/assets/company.png");
+	this.pics.push("/assets/investor.png");
+	this.pics.push("/assets/artist.png");
+	this.pics.push("/assets/programmer.png");
+	this.pics.push("/assets/blankcategory.png");
+	this.pics.push("/assets/blankcontact.png");
 	
 	this.picNames.push("Institution");
 	this.picNames.push("Investor");

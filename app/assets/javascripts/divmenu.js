@@ -8,32 +8,19 @@ function DivMenu(w, h, x, y ) {
 	this.y = y;
 	this.width = w;
 	this.height = h;
-	this.nodeSize = 0.88;
+	this.nodeSize = 0.8;
 	this.firstindex = 0;
 	this.nodeType = "image";
 	
 	this.frameDiv = document.createElement('div');
-	this.frameDiv.setAttribute('style','position:absolute; top:' + this.x + "px; left:" + this.y + 'px; background:#36C; width:' + w + 'px; height:' + (h) + 'px;' );
+	this.frameDiv.setAttribute('style','position:absolute; top:' + this.x + "px; left:" + this.y + 'px; background:url(/assets/smallmenuback.png); width:' + w + 'px; height:' + (h) + 'px;z-index:0' );
 	this.frameDiv.style.mozBoxShadow = "3px 3px 4px #808080"
 	this.frameDiv.style.boxShadow = "3px 3px 4px #808080"
 	this.frameDiv.style.webkitBoxShadow = "3px 3px 4px #808080"
-	this.up = document.createElement('img');
-	this.up.setAttribute('src','/assets/up.png');
-	var xup = w*0.5 - y + 5;
-	var yup = x -25;
-	this.up.setAttribute('style','position:absolute; top:' + yup + "px; left:" +xup + 'px; z-index:3;');
-	this.up.setAttribute('onclick','subMenuIndex()');
-	
-	this.down = document.createElement('img');
-	this.down.setAttribute('src','/assets/down.png');
-	xup = w*0.5 - y + 5;
-	yup = x + h -3;
-	this.down.setAttribute('style','position:absolute; top:' + yup + "px; left:" +xup + 'px; z-index:3;');
-	this.down.setAttribute('onclick','addMenuIndex()');
 	
 	document.body.appendChild(this.frameDiv);
-	document.body.appendChild(this.up);
-	document.body.appendChild(this.down);
+	//document.body.appendChild(this.up);
+	//document.body.appendChild(this.down);
 	
 	this.profileList = [];
 	this.nodes = [];
@@ -148,14 +135,14 @@ DivMenu.prototype.resetGrid=function(){
 	else if (this.width > 200)
 		this.nodex = 4;
 	else
-		this.nodex = 3;
+		this.nodex = 1;
 		
 	if (this.height > 500)
 		this.nodey = 9;
 	else if (this.height > 200)
 		this.nodey = 7;
 	else
-		this.nodey = 4;
+		this.nodey = 1;
 	
 	var wid = this.nodeSize * this.width/this.nodex;
 	var wborder = (1 - this.nodeSize) * 0.5 * this.width/this.nodex

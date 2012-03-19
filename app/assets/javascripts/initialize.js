@@ -20,7 +20,7 @@ function el(s)
 	return document.getElementById(s);
 }
 
-function initialize_later(){
+function initialize(){
 	//site Initialization
 	document.body.setAttribute("height",window.innerHeight);
 	//el('footer1').setAttribute("style",'background:#6CF; height:' + window.innerHeight*0.25);
@@ -52,34 +52,29 @@ function initialize_later(){
 	document.addEventListener("touchend",	onMU, false);
 	document.addEventListener("touchmove",	onMM, false);
 	
-	h = window.innerHeight - 190;
-	w = window.innerWidth - 20;
+	h = window.innerHeight - 70;
+	w = window.innerWidth;
 	hw=w/2;
 	hh = h - 300;
 	svg.setAttribute("style","width:100%; height:" + h + "px;");
 	mapui = new MapUI(w,h,svg);
 	//mapui.addNode();
-	setfeed = new Feeddivs();
+	//setfeed = new Feeddivs();
 	
-	actionitem = new ActionItem(((h - 123)*0.5 - 5));
+	actionitem = new ActionItem();
 	
 	//Div style declaration for writing notes
 	var writenotes = el("recommendcontact");
 	writenotes.style.position = "absolute";
-	writenotes.style.width = "210px";
-	writenotes.style.height = hw + "px";
-	writenotes.style.top = hw+30 + "px";
-	writenotes.style.left = "180px";
+	writenotes.style.width = "0px";
+	writenotes.style.height = "0px";
+	writenotes.style.top = "0px";
 	writenotes.style.opacity= 0;
-	writenotes.style.zIndex = 4;
 	
 	var notelists = el("notelist");
 	notelists.style.position = "absolute";
 	notelists.style.overflow = "hidden";
-	notelists.style.width = "210px";
-	notelists.style.height = hw + "px";
-	notelists.style.top = "55px";
-	notelists.style.left = "180px";
+	notelists.style.background = "#d7d7d7";
 	notelists.style.opacity= 0;
 	notelists.style.zIndex = 3;
 	liprof = new LIProfile();
@@ -109,13 +104,11 @@ function onMD(e){
 	var xM = mouseX(e);
 	var yM = mouseY(e);
 	var ymHeight = mapui.height;
-	if (mapui.selectedNode != 0 && xM < 391 && xM > 181  && yM > -10 && yM < ymHeight+5){
+	if (mapui.selectedNode != 0 && xM > window.innerWidth-250){
 		
 	} else {
 	selectedNode = mapui.SetDragged	(mouseX(e), mouseY(e));
 	if (selectedNode != 0){
-		if (selectedNode.profile.checkLastView() && !selectedNode.profile.me)
-			mapui.topFocus.profile.addScore(10);
 		//show list of past notes
 		addNoteList();
 		
@@ -123,12 +116,13 @@ function onMD(e){
 		var wrapdiv = el('recommendcontact');
 		var textTitle = document.getElementById('contacttitle');
 		var textArea = el('contacttextarea');
-		wrapdiv.style.background = "#36C";
+//		wrapdiv.setAttribute('style','background:#d7d7d7;position:absolute; width:210px; height:115px; top:'+(mapui.height-87)+'px;left:180px; opacity:1; z-index:4;');
+		wrapdiv.style.background = "#4a4a4a";
 		wrapdiv.style.position = "absolute";
-		wrapdiv.style.width = "210px";
-		wrapdiv.style.height = "95px";
-		wrapdiv.style.top = (mapui.height-57)+'px';
-		wrapdiv.style.left = "180px"
+		wrapdiv.style.width = "250px";
+		wrapdiv.style.height = "115px";
+		wrapdiv.style.top = (window.innerHeight-120)+"px";
+		wrapdiv.style.right = "0px"
 		wrapdiv.style.opacity = 1;
 		wrapdiv.style.zIndex = 4;
 		wrapdiv.style.mozBoxShadow = "3px 3px 4px #808080"
@@ -137,24 +131,34 @@ function onMD(e){
 		textArea.value = "";
 		textArea.focus();
 		textTitle.textContent = "Notes about " + selectedNode.profile.name;
-		//display the linkedin info
-		liprof.setConnections(selectedNode.profile);
-		liprof.drawAll();
-		actionitem.remove();
-		if (selectedNode !== mapui.topFocus)
+		var plugdiv = document.getElementById("plugview");
+		//display the linkedin info	
+		if (selectedNode !== mapui.topFocus){
+			
+			plugging();
+			liprof.setConnections(selectedNode.profile);
+			liprof.drawAll();
 			actionitem.draw();
+		}
+		else{
+			plugdiv.style.opacity = 0;
+			liprof.removeAll();
+		}
 	} else {
 		var listdiv = el('pastnotemenu');
 		while (listdiv.childNodes.length > 0)
 			listdiv.removeChild(listdiv.childNodes[0]);
-		el('notelist').setAttribute('style','height:190px;width:210px;overflow:hidden;position:absolute;top:35px;left:180px; z-index:-1; opacity:0');
+		el('notelist').style.opacity = 0;
 		var wrapdiv = el('recommendcontact');
 		var textTitle = document.getElementById('contacttitle');
 		var textArea = el('contacttextarea');
 		textArea.value = "";
-		wrapdiv.setAttribute('style','position:absolute; width:210px; height:190px; top:230px; left:180px; opacity:0; z-index:-1; background:#3CF');
+		wrapdiv.style.opacity = 0;
+		//wrapdiv.setAttribute('style','position:absolute; width:210px; height:190px; top:230px; left:180px; opacity:0; z-index:-1; background:#d7d7d7');
 		textArea.focus();
 		textTitle.textContent = "";
+		var plugdiv = document.getElementById("plugview");
+		plugdiv.style.opacity = 0;
 		liprof.removeAll();
 		actionitem.remove();
 	}
@@ -177,8 +181,8 @@ function mouseX(e)
 function mouseY(e)
 {	
 	var cy;
-	if(e.type === "touchstart" || e.type === "touchmove")	cy = e.touches.item(0).clientY-60;
-	else cy = e.clientY-60;
+	if(e.type === "touchstart" || e.type === "touchmove")	cy = e.touches.item(0).clientY - 25;
+	else cy = e.clientY - 25;
 	return (cy); 
 }
 
@@ -261,15 +265,21 @@ function allowDrop(event)
 }
 
 
+
 function onDragEvent(event){
 	var x = -1;
-	for (var i = 0;i < mapui.menu.frameDiv.childNodes.length;i++)
-		if (mapui.menu.frameDiv.childNodes[i] === event.target){
+	for (var i = 0;i < mapui.menu.ulDiv.childNodes.length;i++)
+		if (mapui.menu.ulDiv.childNodes[i] === event.target){
+			x = i+5;
+			event.dataTransfer.setData("Text",x);
+			break;
+		}
+	for (var i = 0;i < mapui.oldmenu.frameDiv.childNodes.length;i++)
+		if (mapui.oldmenu.frameDiv.childNodes[i] === event.target){
 			x = i;
 			event.dataTransfer.setData("Text",x);
 			break;
 		}
-	
 }
 
 function addNotes(){
@@ -283,8 +293,6 @@ function addNotes(){
 			var hour = curdate.getHours();
 			var minutes = curdate.getMinutes();
 			var string = textArea.value +"  " + hour + ":" + minutes + " " + month + "/" + day + "/" + year;
-			selectedNode.profile.appendNotes(string);
-			mapui.topFocus.profile.addScore(5);
 			addNoteList();
 		}
 		textArea.value = "";
@@ -296,16 +304,15 @@ function addNoteList(){
 		while (listdiv.childNodes.length > 0)
 			listdiv.removeChild(listdiv.childNodes[0]);
 	var notelists = el('notelist');
-	notelists.style.height =  ((mapui.height - 123)*0.5 - 5) + "px";
-	notelists.style.top = ((mapui.height - 123)*0.5 + 55) + "px";
+	notelists.style.width = "250px";
+	notelists.style.height =  window.innerHeight*0.5 - 125 + "px";
+	notelists.style.top = window.innerHeight*0.5+"px";
+	notelists.style.right = "0px";
 	notelists.style.opacity= 1;
 	notelists.style.zIndex = 3;
 	//Shadow is ugly with this one
-	notelists.style.mozBoxShadow = "3px 3px 4px #808080"
-	notelists.style.boxShadow = "3px 3px 4px #808080"
-	notelists.style.webkitBoxShadow = "3px 3px 4px #808080"
 
-	notelists.style.background = '#CCF';
+	notelists.style.background = '#d7d7d7';
 	for (var i = 0;i < selectedNode.profile.notes.length;i++){
 		var listele = document.createElement('li');
 		var paraele = document.createElement('p');
@@ -397,8 +404,8 @@ function coffeeEvent(){
 		*/
 		app = new Appointment("Coffee", selectedNode, true);
 		selectedNode.updateTime();
-		mapui.topFocus.profile.addScore(1000);
 		mapui.drawAll(svg);
+		plugging();
 	}
 }
 
@@ -411,8 +418,8 @@ function lunchEvent(){
 		*/
 		app = new Appointment("Lunch", selectedNode, true);
 		selectedNode.updateTime();
-		mapui.topFocus.profile.addScore(2000);
 		mapui.drawAll(svg);
+		plugging();
 	}
 }
 
@@ -425,8 +432,8 @@ function textEvent(){
 		*/
 		app = new Appointment("Text Message", selectedNode, true);
 		selectedNode.updateTime();
-		mapui.topFocus.profile.addScore(100);
 		mapui.drawAll(svg);
+		plugging();
 	}
 }
 
@@ -439,8 +446,8 @@ function callEvent(){
 		*/
 		app = new Appointment("Phone Call", selectedNode, true);
 		selectedNode.updateTime();
-		mapui.topFocus.profile.addScore(500);
 		mapui.drawAll(svg);
+		plugging();
 	}
 }
 
@@ -451,10 +458,10 @@ function emailEvent(){
 		el('catcher').style.background = "#000";
 		el('catcher').style.opacity = 0.7;
 		*/
-	app = new Appointment("Email", selectedNode, true);
-	selectedNode.updateTime();
-	mapui.topFocus.profile.addScore(50);
+		app = new Appointment("Email", selectedNode, true);
+		selectedNode.updateTime();
 		mapui.drawAll(svg);
+		plugging();
 	}
 }
 
@@ -467,8 +474,8 @@ function meetingEvent(){
 		*/
 	app = new Appointment("Meeting", selectedNode, true);
 	selectedNode.updateTime();
-	mapui.topFocus.profile.addScore(3000);
-		mapui.drawAll(svg);
+	mapui.drawAll(svg);
+	plugging();
 	}
 }
 
@@ -483,4 +490,25 @@ function addCommas(nStr)
 		x1 = x1.replace(rgx, '$1' + ',' + '$2');
 	}
 	return x1 + x2;
+}
+
+function plugging() {
+	if (selectedNode != mapui.topFocus){
+			var plugdiv = document.getElementById("plugview");
+			plugdiv.style.opacity = 1;
+			if (selectedNode.profile.getNotify())
+				plugdiv.style.background = "url(unplugged.png)";
+			else 
+				plugdiv.style.background = "url(plugged.png)";
+			if (selectedNode.profile.lastConnected === 0)
+				document.getElementById("plugdesc").textContent = "Never!"
+			else{
+				var today = new Date();
+				var dayz = parseInt((today.UTC-selectedNode.profile.lastConnected.getTime())/86400000);
+				document.getElementById("plugdesc").textContent = dayz + " days since you connected.";
+			}
+	}
+	else{
+		plugdiv.style.opacity = 0;
+	}
 }

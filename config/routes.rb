@@ -1,6 +1,6 @@
 Edacioserver::Application.routes.draw do
   
-  resources :users, only: [:new, :show]
+  resources :users, only: [:new, :show, :create]
   resources :sessions, only: [:new, :create, :destroy]
 
   root to: 'static_pages#home'

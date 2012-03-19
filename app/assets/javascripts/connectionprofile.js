@@ -100,7 +100,7 @@ connectionProfile.prototype.getNotify = function(){
 connectionProfile.prototype.updateTime = function(){
 	this.lastConnected = new Date();
 }
-
+/*
 
 connectionProfile.prototype.addScore = function(delta){
  this.xp += delta;
@@ -132,18 +132,19 @@ connectionProfile.prototype.clearAwards = function()
  this.awards= 0;
  this.updateProfile();
 }
-
+*/
 connectionProfile.prototype.updateProfile = function(){
-	document.getElementById('profileimage').src = this.picURL;
-	document.getElementById('profiletitle').innerHTML = this.title;
+	//document.getElementById('profileimage').src = this.picURL;
+	if (this.name != "Your Name")
+		document.getElementById('profilename').innerHTML = this.name;
 	if (this.alerts === 0){
 		document.getElementById('alertCounter').style.opacity = 0;
 	} else{
 		document.getElementById('alertCounter').style.opacity = 1;
 	document.getElementById('alertCounterText').innerHTML = parseInt(this.alerts);
 	}
-	document.getElementById('credits').innerHTML = parseInt(this.credits);
+	/*document.getElementById('credits').innerHTML = parseInt(this.credits);
 	document.getElementById('awards').innerHTML = parseInt(this.awards);
 	document.getElementById('links').innerHTML = parseInt(this.links);
-	document.getElementById('points').innerHTML = parseInt(this.xp);
+	document.getElementById('points').innerHTML = parseInt(this.xp);*/
 }

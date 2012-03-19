@@ -11,10 +11,10 @@ function MapUI(w, h,csvg){
 	this.damping = 0.95;
 	this.updown = 1;
 	this.layerlevel = 0;
-	this.sizeConstraint = 0.45;
+	this.sizeConstraint = 0.4;
 	this.circleRadius = h*this.sizeConstraint;
 	this.centerx = w/2 - 10;
-	this.centery = this.circleRadius + 20;
+	this.centery = this.circleRadius + 80;
 	this.stable = true;
 	//this.width = (window.innerWidth-20)*0.5;	
 	//this.height = 300;
@@ -27,7 +27,8 @@ function MapUI(w, h,csvg){
 	this.doCircle = false;
 	var xx = 70;
 	var innerheight = window.innerHeight*0.8;
-	this.menu = new DivMenu(150,innerheight,xx,16);
+	this.menu = new JoshuaMenu(200,window.innerHeight-40,0,40);
+	this.oldmenu = new DivMenu(window.innerWidth-200,30,40,200);
 };
 
 MapUI.prototype.increaseSize = function(){
@@ -61,7 +62,7 @@ MapUI.prototype.changeCircle = function(){
 
 MapUI.prototype.loadTopNodes = function(){
 	//Linkedin Load for your own shit but temporarily
-	var x = new connectionProfile(0,"/assets/tempme.png","Your Name","Mr. Incredible","Ann Arbor, MI", "Working like Crazy and doing other shizzles and hizzles and bizzles","");
+	var x = new connectionProfile(0,"/assets/tempme.png","Your Name","Mr. Incredible at somewhere in some awesome job in USA","Ann Arbor, MI", "Working like Crazy and doing other shizzles and hizzles and bizzles","");
 	x.setMe();
 	this.topFocus = new Focus(x,0);
 	this.currentFocus = this.topFocus;
@@ -166,8 +167,9 @@ MapUI.prototype.reposition = function() {
 	if (this.currentFocus.parent != 0)
 	{
 		//var parentX = this.centerx - this.circleRadius+60;
-		var parentX = this.centerx + this.circleRadius + 100;
-		this.currentFocus.parent.setXY(parentX, this.centery);
+		var parentX = this.centerx - this.circleRadius*0.8;
+		var parentY = this.centery - this.circleRadius*0.8;
+		this.currentFocus.parent.setXY(parentX, parentY);
 		var line = document.createElementNS("http://www.w3.org/2000/svg", 'line');
 		line.setAttribute("stroke", "#9966FF");
 		line.setAttribute("fill", "none");
@@ -176,7 +178,7 @@ MapUI.prototype.reposition = function() {
 		line.setAttribute('x1',this.centerx);
 		line.setAttribute('y1',this.centery);
 		line.setAttribute('x2',parentX);
-		line.setAttribute('y2',this.centery);
+		line.setAttribute('y2',parentY);
 		this.parentLine = line;
 	}
 

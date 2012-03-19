@@ -8,8 +8,8 @@ function Feeddivs(){
 }
 
 Feeddivs.prototype.initialize = function(){
-	var foot = document.getElementById('footer');
-	var wrapWidth = foot.clientWidth;
+	var foot = document.getElementsByTagName('footer');
+	var wrapWidth = foot.item(0).clientWidth;
 	this.eachWidth = wrapWidth*0.18;
 	this.public.style.width = this.eachWidth + "px";
 	this.fbook.style.width = this.eachWidth + "px";

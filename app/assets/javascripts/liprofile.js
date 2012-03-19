@@ -13,11 +13,12 @@ function LIProfile() {
 	this.titleTag = document.getElementById('linkTitle');
 	this.currentStatusTag = document.getElementById('linkStatus');
 	this.wrapdiv = document.getElementById('contactprofile');
+	this.wrapdiv.style.zIndex = 3;
 	this.reposition();
 }
 
 LIProfile.prototype.setConnections = function(profile) {
-   this.publicURL = profile.publicURL;
+    this.publicURL = profile.publicURL;
 	this.pictureURL = profile.picURL;
 	this.name = profile.name;
 	this.location = profile.location;
@@ -31,17 +32,16 @@ LIProfile.prototype.setConnections = function(profile) {
 
 LIProfile.prototype.testBuild = function(){
 	var wrapdiv = document.getElementById('contactprofile');
-	wrapdiv.style.width
 	this.profTag = document.createElement('image');
-	this.profTag.setAttribute('src',"/assets/tempme.png");
+	this.profTag.setAttribute('src',"tempme.png");
 	this.nameTag = document.createElement('h3');
-	this.nameTag.textContent =  "Boob TIT" ;
+	this.nameTag.textContent =  "" ;
 	this.locationTag = document.createElement('h4');
-	this.locationTag.textContent = "Boobland";
+	this.locationTag.textContent = "";
 	this.titleTag = document.createElement('h5');
-	this.titleTag.textContent = "Mr BoobHandler";
+	this.titleTag.textContent = "";
 	this.currentStatusTag = document.createElement('p');
-	this.currentStatusTag.textContent = "I'm handling boobs I'm handling boobs I'm handling boobs I'm handling boobs I'm handling boobs I'm handling boobs";
+	this.currentStatusTag.textContent = "";
 }
 
 LIProfile.prototype.buildDiv = function(){
@@ -55,32 +55,36 @@ LIProfile.prototype.buildDiv = function(){
 
 LIProfile.prototype.reposition = function(){
 	this.profTag.style.position = "absolute";
-	this.profTag.style.top = "5px";
-	this.profTag.style.left = "5px";
-	this.profTag.style.width = "60px";
-	this.profTag.style.height = "60px";
+	this.profTag.style.top = "1px";
+	this.profTag.style.left = "1px";
+	this.profTag.style.width = "58px";
+	this.profTag.style.height = "58px";
 	
 	this.nameTag.style.position = "absolute";
-	this.nameTag.style.top = "10px";
-	this.nameTag.style.left= "70px";
+	this.nameTag.style.top = "0px";
+	this.nameTag.style.left= "60px";
+	this.nameTag.style.color = "#FFF";
 	
 	this.titleTag.style.position = "absolute";
-	this.titleTag.style.top = "30px";
-	this.titleTag.style.left= "70px";
+	this.titleTag.style.top = "60px";
+	this.titleTag.style.left= "5px";
 	this.titleTag.style.fontSize = "11px";
 	
 	this.locationTag.style.position = "absolute";
-	this.locationTag.style.top = "65px";
+	this.locationTag.style.top = "88px";
 	this.locationTag.style.left= "5px";
+	this.locationTag.style.fontSize = "11px";
 
 	this.currentStatusTag.style.position = "absolute";
-	this.currentStatusTag.style.top = "85px";
+	this.currentStatusTag.style.top = "105px";
 	this.currentStatusTag.style.left= "5px";
-	this.currentStatusTag.style.fontSize = "10px";
+	this.currentStatusTag.style.fontSize = "8px";
 }
 
 LIProfile.prototype.drawAll = function(){
 	this.removeAll();
+	this.wrapdiv.style.opacity = 1;
+	this.wrapdiv.style.zIndex = 3;
 	this.wrapdiv.appendChild(this.profTag);
 	this.wrapdiv.appendChild(this.nameTag);
 	this.wrapdiv.appendChild(this.titleTag);
@@ -89,6 +93,7 @@ LIProfile.prototype.drawAll = function(){
 }
 
 LIProfile.prototype.removeAll = function(){
+	this.wrapdiv.style.opacity = 0;
 	while (this.wrapdiv.childNodes.length > 0)
 		this.wrapdiv.removeChild(this.wrapdiv.childNodes[0]);
 }
