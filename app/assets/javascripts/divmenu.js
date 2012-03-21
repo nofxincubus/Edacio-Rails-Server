@@ -52,12 +52,12 @@ DivMenu.prototype.initialize = function() {
 	Designers
 	*/
 	
-	this.profileList.push(new connectionProfile(0,"/assets/company.png","Institution","","","",""));
-	this.profileList.push(new connectionProfile(0,"/assets/investor.png","Investor","","","",""));
-	this.profileList.push(new connectionProfile(0,"/assets/artist.png","Designer","","","",""));
-	this.profileList.push(new connectionProfile(0,"/assets/programmer.png","Programmer","","","",""));
-	this.profileList.push(new connectionProfile(0,"/assets/blankcategory.png","New Category","","","",""));
-	this.profileList.push(new connectionProfile(0,"/assets/blankcontact.png","New Contact","","","",""));
+	this.profileList.push(new connectionProfile(0,0,"/assets/company.png","Institution","","","",""));
+	this.profileList.push(new connectionProfile(0,0,"/assets/investor.png","Investor","","","",""));
+	this.profileList.push(new connectionProfile(0,0,"/assets/artist.png","Designer","","","",""));
+	this.profileList.push(new connectionProfile(0,0,"/assets/programmer.png","Programmer","","","",""));
+	this.profileList.push(new connectionProfile(0,0,"/assets/blankcategory.png","New Category","","","",""));
+	this.profileList.push(new connectionProfile(0,0,"/assets/blankcontact.png","New Contact","","","",""));
 	
 	this.resetGrid();
 }

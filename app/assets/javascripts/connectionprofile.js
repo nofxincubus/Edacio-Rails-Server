@@ -3,8 +3,9 @@
 // Email nofxincubus@gmail.com for questions
 // Use it all you want just put on your site that you are using my stuff :)
 
-function connectionProfile(id, picURL, name, title, location, currentStatus, publicURL){
+function connectionProfile(id,linkid, picURL, name, title, location, currentStatus, publicURL){
 	this.id = id;
+	this.linkid = linkid;
 	this.picURL = picURL;
 	this.name = name;
 	this.title = title;
@@ -28,10 +29,15 @@ function connectionProfile(id, picURL, name, title, location, currentStatus, pub
 	this.type = 1;
 	//add Notes and shit
 	this.notes = [];
-	this.permanantTag = [];
+	this.permanantTag = "";
 	//this.currentChallenge
 	this.pastChallenges = [];
 }
+
+connectionProfile.prototype.setID = function(id){
+	this.id = id;
+}
+
 
 connectionProfile.prototype.appendNotes = function(notes){
 	this.notes.push(notes);

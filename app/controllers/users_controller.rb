@@ -5,14 +5,15 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-	 @profile = @user.profile.find(params[:id])
+	 @profile = @user.profile.first
 	 @client = LinkedIn::Client.new("iqfy4iibw74f", "TV56YgxsI1jHwULj")
     if current_user.oauth_token.nil?
+		redirect_to auth_path
 	 else
 		 @client.authorize_from_access(current_user.oauth_token, current_user.oauth_secret)
-	    @connections = @client.connections(:fields =>  %w(id first-name last-name headline location picture-url site-standard-profile-request current-share))
+	    @connecti = @client.connections(:fields =>  %w(id first-name last-name headline location picture-url site-standard-profile-request current-status))
 		 
-		@id = @connections.values.last
+		@id = @connecti.values.last
 		@cont = Array.new
 		@id.each do |k|
 			if k.location.nil?
@@ -28,10 +29,10 @@ class UsersController < ApplicationController
 			if k.currentShare.nil?
 				@status = ""
 			else
-				if k.currentShare.description.nil?
+				if k.currentStatus.description.nil?
 					@status = ""
 				else
-					@status = k.currentShare.description
+					@status = k.currentStatus.description
 				end
 			end
 			if k.pictureUrl.nil?
@@ -41,8 +42,12 @@ class UsersController < ApplicationController
 			end
 			@cont.push([k.id,@picurl, k.firstName+' '+k.lastName, k.headline, @location, @status, @url])
 		end
-		
 	 end
+		@connections = Array.new
+		@contacts = @user.connections
+		@contacts.each do |k|
+			@connections.push([k.id,k.linkid,k.picurl,k.name,k.title,k.location,k.status,k.linkurl,k.tags,k.priority,k.parent_id])
+		end
   end
 
   def new

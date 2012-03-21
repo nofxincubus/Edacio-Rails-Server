@@ -285,3 +285,15 @@ Focus.prototype.getAlerts = function(){
 	}
 	return total;
 }
+
+Focus.prototype.returnMatchFocus = function(id){
+
+	if (this.profile.id == id)
+		return this;
+	else {
+		for (var i = 0;i < this.children.length;i++)
+			if (this.children[i].returnMatchFocus() != -1)
+				return this.children[i];
+	}
+	return -1;
+}

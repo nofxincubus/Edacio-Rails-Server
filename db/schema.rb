@@ -11,7 +11,26 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120316211614) do
+ActiveRecord::Schema.define(:version => 20120320012013) do
+
+  create_table "connections", :force => true do |t|
+    t.string   "linkid"
+    t.integer  "user_id"
+    t.string   "picurl"
+    t.string   "name"
+    t.string   "title"
+    t.string   "location"
+    t.string   "linkurl"
+    t.string   "status"
+    t.string   "tags"
+    t.integer  "priority"
+    t.integer  "parent_id"
+    t.string   "last_contacted"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  add_index "connections", ["user_id", "created_at"], :name => "index_connections_on_user_id_and_created_at"
 
   create_table "profiles", :force => true do |t|
     t.string   "linkid"
@@ -40,6 +59,7 @@ ActiveRecord::Schema.define(:version => 20120316211614) do
     t.string   "remember_token"
     t.string   "oauth_token"
     t.string   "oauth_secret"
+    t.string   "linkid"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

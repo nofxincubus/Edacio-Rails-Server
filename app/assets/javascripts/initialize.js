@@ -28,7 +28,7 @@ function initialize(){
 	//myProfile = new profile();
 	
 	if (getInternetExplorerVersion() === -1)
-		runFancy = true;
+		runFancy = false;
 	else
 		runFancy = false;
 	svg = el('svgc');
@@ -51,7 +51,7 @@ function initialize(){
 	document.addEventListener("touchstart",	onMD, false);
 	document.addEventListener("touchend",	onMU, false);
 	document.addEventListener("touchmove",	onMM, false);
-	
+	eoifjdkjfelfiejfkjdf = -100;
 	h = window.innerHeight - 70;
 	w = window.innerWidth;
 	hw=w/2;
@@ -63,20 +63,11 @@ function initialize(){
 	
 	actionitem = new ActionItem();
 	
-	//Div style declaration for writing notes
-	var writenotes = el("recommendcontact");
-	writenotes.style.position = "absolute";
-	writenotes.style.width = "0px";
-	writenotes.style.height = "0px";
-	writenotes.style.top = "0px";
-	writenotes.style.opacity= 0;
+	//Right menu stuff
+	rightAction = el('rightMenu');
+	rightAction.style.height = (h + 30) + "px";
 	
-	var notelists = el("notelist");
-	notelists.style.position = "absolute";
-	notelists.style.overflow = "hidden";
-	notelists.style.background = "#d7d7d7";
-	notelists.style.opacity= 0;
-	notelists.style.zIndex = 3;
+
 	liprof = new LIProfile();
 	selectedNode =0;
 	onEF();
@@ -100,75 +91,75 @@ function onSC(e){
 	}
 }
 
+function displayConnectionInfo(){
+//display the linkedin info	
+			if (selectedNode !== mapui.topFocus){
+				addNoteList();
+				var textTitle = document.getElementById('contacttitle');
+				var textArea = el('contacttextarea');
+				textArea.value = "";
+				textArea.focus();
+				textTitle.textContent = "Notes about " + selectedNode.profile.name;
+				var plugdiv = document.getElementById("plugview");
+				plugging();
+				liprof.setConnections(selectedNode.profile);
+				actionitem.draw();
+				if (document.getElementById('rightMenu').style.opacity < 1){
+					$('#rightMenu').animate({
+					opacity: 1,
+					width: '250',
+					}, 700, function() {
+					// Animation complete.
+					});
+				} 
+			} else {
+					if (document.getElementById('rightMenu').style.opacity > 0){
+						$('#rightMenu').animate({
+						opacity: 0,
+						width: '0',
+						}, 700, function() {
+						// Animation complete.
+						});
+					}
+				}		
+}
+
 function onMD(e){
 	var xM = mouseX(e);
 	var yM = mouseY(e);
 	var ymHeight = mapui.height;
 	if (mapui.selectedNode != 0 && xM > window.innerWidth-250){
-		
 	} else {
-	selectedNode = mapui.SetDragged	(mouseX(e), mouseY(e));
-	if (selectedNode != 0){
-		//show list of past notes
-		addNoteList();
-		
-		//show adding notes about person
-		var wrapdiv = el('recommendcontact');
-		var textTitle = document.getElementById('contacttitle');
-		var textArea = el('contacttextarea');
-//		wrapdiv.setAttribute('style','background:#d7d7d7;position:absolute; width:210px; height:115px; top:'+(mapui.height-87)+'px;left:180px; opacity:1; z-index:4;');
-		wrapdiv.style.background = "#4a4a4a";
-		wrapdiv.style.position = "absolute";
-		wrapdiv.style.width = "250px";
-		wrapdiv.style.height = "115px";
-		wrapdiv.style.top = (window.innerHeight-120)+"px";
-		wrapdiv.style.right = "0px"
-		wrapdiv.style.opacity = 1;
-		wrapdiv.style.zIndex = 4;
-		wrapdiv.style.mozBoxShadow = "3px 3px 4px #808080"
-		wrapdiv.style.boxShadow = "3px 3px 4px #808080"
-		wrapdiv.style.webkitBoxShadow = "3px 3px 4px #808080"
-		textArea.value = "";
-		textArea.focus();
-		textTitle.textContent = "Notes about " + selectedNode.profile.name;
-		var plugdiv = document.getElementById("plugview");
-		//display the linkedin info	
-		if (selectedNode !== mapui.topFocus){
-			
-			plugging();
-			liprof.setConnections(selectedNode.profile);
-			liprof.drawAll();
-			actionitem.draw();
+		selectedNode = mapui.SetDragged	(mouseX(e), mouseY(e));
+		if (selectedNode != 0){
+			displayConnectionInfo();
+		} else {
+			if (document.getElementById('rightMenu').style.opacity > 0){
+				$('#rightMenu').animate({
+					opacity: 0,
+					width: '0',
+					}, 700, function() {
+					// Animation complete.
+					});
+			}
 		}
-		else{
-			plugdiv.style.opacity = 0;
-			liprof.removeAll();
-		}
-	} else {
-		var listdiv = el('pastnotemenu');
-		while (listdiv.childNodes.length > 0)
-			listdiv.removeChild(listdiv.childNodes[0]);
-		el('notelist').style.opacity = 0;
-		var wrapdiv = el('recommendcontact');
-		var textTitle = document.getElementById('contacttitle');
-		var textArea = el('contacttextarea');
-		textArea.value = "";
-		wrapdiv.style.opacity = 0;
-		//wrapdiv.setAttribute('style','position:absolute; width:210px; height:190px; top:230px; left:180px; opacity:0; z-index:-1; background:#d7d7d7');
-		textArea.focus();
-		textTitle.textContent = "";
-		var plugdiv = document.getElementById("plugview");
-		plugdiv.style.opacity = 0;
-		liprof.removeAll();
-		actionitem.remove();
-	}
 	}
 }
 
 function onMM(e){mapui.MoveDragged	(mouseX(e), mouseY(e));}
 function onMU(e){
-	mapui.StopDragging (mouseX(e), mouseY(e));
-	mapui.drawAll(svg);
+	if (mapui.StopDragging (mouseX(e), mouseY(e))){
+		if (document.getElementById('rightMenu').style.opacity > 0){
+			$('#rightMenu').animate({
+			opacity: 0,
+			width: '0',
+			}, 700, function() {
+			// Animation complete.
+			});
+		}
+		mapui.drawAll(svg);
+	} else
+		mapui.drawAll(svg);
 }
 
 function mouseX(e)
@@ -181,8 +172,8 @@ function mouseX(e)
 function mouseY(e)
 {	
 	var cy;
-	if(e.type === "touchstart" || e.type === "touchmove")	cy = e.touches.item(0).clientY - 25;
-	else cy = e.clientY - 25;
+	if(e.type === "touchstart" || e.type === "touchmove")	cy = e.touches.item(0).clientY - 40;
+	else cy = e.clientY - 40;
 	return (cy); 
 }
 
@@ -293,9 +284,11 @@ function addNotes(){
 			var hour = curdate.getHours();
 			var minutes = curdate.getMinutes();
 			var string = textArea.value +"  " + hour + ":" + minutes + " " + month + "/" + day + "/" + year;
+			selectedNode.profile.notes.push(string);
 			addNoteList();
 		}
 		textArea.value = "";
+		//server side code to POST on database//
 	}
 }
 
@@ -303,16 +296,8 @@ function addNoteList(){
 	var listdiv = el('pastnotemenu');
 		while (listdiv.childNodes.length > 0)
 			listdiv.removeChild(listdiv.childNodes[0]);
-	var notelists = el('notelist');
-	notelists.style.width = "250px";
-	notelists.style.height =  window.innerHeight*0.5 - 125 + "px";
-	notelists.style.top = window.innerHeight*0.5+"px";
-	notelists.style.right = "0px";
-	notelists.style.opacity= 1;
-	notelists.style.zIndex = 3;
-	//Shadow is ugly with this one
 
-	notelists.style.background = '#d7d7d7';
+
 	for (var i = 0;i < selectedNode.profile.notes.length;i++){
 		var listele = document.createElement('li');
 		var paraele = document.createElement('p');
@@ -377,13 +362,7 @@ function addNoteList(){
 }
 
 function onEventSubmit(){
-	
 	app.removeAll();
-	/*
-	el('catcher').style.zIndex = 2;
-	el('catcher').style.background = "#000";
-	el('catcher').style.opacity = 0;
-	*/
 }
 
 function onEventCancel(){
@@ -495,11 +474,10 @@ function addCommas(nStr)
 function plugging() {
 	if (selectedNode != mapui.topFocus){
 			var plugdiv = document.getElementById("plugview");
-			plugdiv.style.opacity = 1;
 			if (selectedNode.profile.getNotify())
-				plugdiv.style.background = "url(unplugged.png)";
+				plugdiv.style.background = "url(/assets/unplugged.png)";
 			else 
-				plugdiv.style.background = "url(plugged.png)";
+				plugdiv.style.background = "url(/assets/plugged.png)";
 			if (selectedNode.profile.lastConnected === 0)
 				document.getElementById("plugdesc").textContent = "Never!"
 			else{
@@ -508,7 +486,6 @@ function plugging() {
 				document.getElementById("plugdesc").textContent = dayz + " days since you connected.";
 			}
 	}
-	else{
-		plugdiv.style.opacity = 0;
-	}
 }
+
+

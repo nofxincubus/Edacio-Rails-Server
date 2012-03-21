@@ -1,58 +1,100 @@
 <%= content_for :body_attributes, "ondragover='allowDrop(event)' ondrop='drop(event)' onClick='onMD(event)'" %>
 <% provide(:title, @user.username) %>
 
+
+<!-- User Profile -->
 <div id='profile'>
-	 <%= user_profile_for @profile.picurl %>
-    <h3 id="profilename"> <%= @profile.name %></h1>
-    <div id="alertCounter" style="opacity:0">
-        <p id="alertCounterText"><p>
-    </div>
-	 <h3 id="profiletitle"> <%= @profile.title %></h1>
+	<%= user_profile_for @profile.picurl %>
+	<h3 id="profilename"> <%= @profile.name %></h1>
+	<div id="alertCounter" style="opacity:0">
+		<p id="alertCounterText"><p>
+	</div>
+	<h3 id="profiletitle"> <%= @profile.title %></h1>
 </div>
 
+
+<!-- Menu on the right side -->
+<div id="rightMenu">
+	<!-- plug visual -->
+	<div id="plugview">
+		<h4 id = "plugdesc" class = "whitetext"></h4>
+	</div>
+
+	<!-- linkedin contact profile -->
+	<div id="contactprofile">
+		<img id="linkImage" src="/assets/tempme.png"/>
+		<h3 id="linkName" class = "whitetext"></h3>
+		<h3 id="linkTitle" class = "whitetext"></h3>
+		<h3 id="linkLocation" class = "whitetext"></h3>
+		<h3 id="linkStatus" class = "whitetext"></h3>
+	</div>
+
+	<!-- adding notes -->
+	<div id="noteaddbox">
+		<h3 id="contacttitle">Other Name</h3>
+		<input id ="contacttextarea" ></input>
+		<button class ="btn" style="position:absolute;right:0px;bottom:5px" onClick="addNotes()">Add</button>
+	</div>
+	
+	<!-- notelist -->
+	<div id="notelist" >
+		<ul id="pastnotemenu">
+		</ul>
+	</div>
+</div>
 
 <div id="menulist">
  <ul id="menulistul">
  </ul>
 </div>
 
-<div id="actionableitem" style="-moz-box-shadow: 3px 3px 4px #CCC;-webkit-box-shadow: 3px 3px 4px #CCC;box-shadow: 3px 3px 4px #CCC;">
-        </div>
-        <div id="notelist" >
-        	<ul id="pastnotemenu">
-            </ul>
-        </div>
-		<div id="recommendcontact" style="-moz-box-shadow: 3px 3px 4px #CCC;-webkit-box-shadow: 3px 3px 4px #CCC;box-shadow: 3px 3px 4px #CCC;">
-        	<h3 id="contacttitle" style="position:relative; top:0px; left:3px; z-index:inherit;background:"></h3>
-   			<input id ="contacttextarea" style="left:3px;width:200px;position:relative;"></input>
-            <button class ="btn" style="position:absolute;right:0px;bottom:5px" onClick="addNotes()">Add</button>
-        </div>
+       
+		
 
 		<svg id="svgc" style="width:100%; height:570px; background:#FFF; z-index:0"  version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 		</svg>
-        <div id="plugview" class="plugconnection">
-        	<h4 id = "plugdesc"></h4>
-        </div>
-        <div id="contactprofile" class="bottomright">
-        <img id="linkImage" src="tempme.png"/>
-        <h3 id="linkName" ></h3>
-        <h3 id="linkTitle" ></h3>
-        <h3 id="linkLocation"></h3>
-        <h3 id="linkStatus"></h3>
-		</div>
+
+
+      
+       
+
 
 <%= javascript_tag :defer => 'defer' do %>
+	initialize();
+
+	//main profile
+	var userProfile = new connectionProfile(0,"<%= @profile.linkid%>","<%= @profile.picurl%>","<%= @profile.name%>","<%= @profile.title%>","<%= @profile.location%>",
+														 "","<%= @profile.linkurl%>");
+	mapui.resetTopNodes(userProfile);
+	//Linkedin MENU
 	var linnnk = [];
 	var x;
 	<% @cont.each do |order| %>
-		x = new connectionProfile("<%= order[0] %>","<%= order[1] %>","<%= order[2] %>","<%= order[3] %>","<%= order[4] %>","<%= order[5] %>","<%= order[6] %>");
+		x = new connectionProfile(0,"<%= order[0] %>","<%= order[1] %>","<%= order[2] %>","<%= order[3] %>","<%= order[4] %>","<%= order[5] %>","<%= order[6] %>");
 		linnnk.push(x);
 	<% end %>
-	initialize();
 	mapui.menu.addLinked(linnnk);
+	
+	//Load links
+	var profileList = [];
+	var z;
+	var foci;
+	var paraFoci;
+	<% @connections.each do |b| %>
+		z = new connectionProfile(<%= b[0] %>,"<%= b[1] %>","<%= b[2] %>","<%= b[3] %>","<%= b[4] %>","<%= b[5] %>","<%= b[6] %>","<%= b[7] %>");
+		z.tag = "<%= b[8] %>";
+		z.priority = <%= b[9] %>;
+		if (<%= b[10] %> == 0){
+			foci = new Focus(z,mapui.topFocus);
+			mapui.topFocus.children.push(foci);
+		}else {
+			paraFoci = mapui.topFocus.returnMatchFocus(<%= b[10] %>)
+			foci = new Focus(z,paraFoci);
+			paraFoci.children.push(foci);
+		}
+		
+	<% end %>
 <% end %>
-
-
 
 	
 	
