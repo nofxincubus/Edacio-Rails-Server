@@ -287,13 +287,16 @@ Focus.prototype.getAlerts = function(){
 }
 
 Focus.prototype.returnMatchFocus = function(id){
-
-	if (this.profile.id == id)
-		return this;
+	var x = -1;
+	if (this.profile.id === id)
+		x = this;
 	else {
 		for (var i = 0;i < this.children.length;i++)
-			if (this.children[i].returnMatchFocus() != -1)
-				return this.children[i];
+			if (this.children[i].returnMatchFocus(id) != -1)
+				x = this.children[i];
 	}
-	return -1;
+	if (x === -1)
+		return -1;
+	else
+		return x;
 }

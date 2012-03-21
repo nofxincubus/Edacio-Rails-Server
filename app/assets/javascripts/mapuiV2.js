@@ -402,7 +402,7 @@ MapUI.prototype.dropNode = function(b,a, selected, firstindex){
 					this.currentId++;
 				}
 				if (foci != 0){
-					$.ajax({type:"POST",url:'/connections', dataType: "json", data: 
+					$.ajax({type:"POST",url:'/connections', dataType: "connections", data: 
 							  {"connection":{"linkid":foci.profile.linkid,
 								"picurl":foci.profile.picURL,
 								"name":foci.profile.name,
@@ -423,6 +423,9 @@ MapUI.prototype.dropNode = function(b,a, selected, firstindex){
 									eoifjdkjfelfiejfkjdf = -100;
             }});
 					this.currentFocus.children[i].children.push(foci);
+					selectedNode = foci;
+					selectedNode.isSelected();
+					displayConnectionInfo();
 					inserted = true;
 				}
 				
@@ -448,7 +451,7 @@ MapUI.prototype.dropNode = function(b,a, selected, firstindex){
 				}
 			if (foci != 0){
 				
-				$.ajax({type:"POST",url:'/connections', dataType: "json", data: 
+				$.ajax({type:"POST",url:'/connections', dataType: "connections", data: 
 							  {"connection":{"linkid":foci.profile.linkid,
 								"picurl":foci.profile.picURL,
 								"name":foci.profile.name,
@@ -471,6 +474,7 @@ MapUI.prototype.dropNode = function(b,a, selected, firstindex){
 
 				this.currentFocus.children.push(foci);	
 				selectedNode = foci;
+				selectedNode.isSelected();
 				displayConnectionInfo();
 				this.inserted = true;	
 			}

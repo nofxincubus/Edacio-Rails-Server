@@ -14,7 +14,6 @@ Edacioserver::Application.routes.draw do
   match '/signup', to: 'users#new'
   match '/signin',  to: 'sessions#new'
   match '/first',  to: 'users#first'
-  match '/connections',  to: 'connections#create'
   match '/auth',  to: 'linkauth#index'	
   match '/auth/callback',  to: 'linkauth#callback'
   match '/signout', to: 'sessions#destroy', via: :delete

@@ -44,8 +44,7 @@ class UsersController < ApplicationController
 		end
 	 end
 		@connections = Array.new
-		@contacts = @user.connections
-		@contacts.each do |k|
+		@user.connections.each do |k|
 			@connections.push([k.id,k.linkid,k.picurl,k.name,k.title,k.location,k.status,k.linkurl,k.tags,k.priority,k.parent_id])
 		end
   end
