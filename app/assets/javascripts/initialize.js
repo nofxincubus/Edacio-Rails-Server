@@ -133,12 +133,11 @@ function onMD(e){
 	if (selectedNode != 0 && xM > window.innerWidth-250){
 	} else {
 		selectedNode = mapui.SetDragged	(mouseX(e), mouseY(e));
-		var notelists = el('pastnotemenu');
+		var liArray = $("#pastnotemenu li");
 		if (selectedNode != 0){
 			selectedNode.isSelected();
 			// for Form
 			//el('conID').value = selectedNode.profile.id;
-			var liArray = $("#pastnotemenu li");
 			for (var i = 0;i < liArray.length;i++)
 				if (parseInt(liArray[i].id) === selectedNode.profile.id)
 					liArray[i].style.display = "block"

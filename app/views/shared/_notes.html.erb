@@ -1,7 +1,7 @@
-<% if current_user.notes.any? %>
+<% if @notelist.any? %>
 	<div id="notelist" >
 		<ul id="pastnotemenu">
-    		<%= render current_user.notes  %>
+    		<%= render @notelist  %>
 		</ul>
 	</div>
 <% end %>
