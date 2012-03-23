@@ -4,6 +4,7 @@ Edacioserver::Application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy]
   resources :profile, only: [:create, :destroy]
   resources :connections, only: [:create, :destroy]
+  resources :notes, only: [:create, :destroy]
 
   root to: 'static_pages#home'
   match '/help',    to: 'static_pages#help'
@@ -14,7 +15,8 @@ Edacioserver::Application.routes.draw do
   match '/signup', to: 'users#new'
   match '/signin',  to: 'sessions#new'
   match '/first',  to: 'users#first'
-  match '/auth',  to: 'linkauth#index'	
+  match '/auth',  to: 'linkauth#index'
+  match '/userselect',  to: 'users#select'
   match '/auth/callback',  to: 'linkauth#callback'
   match '/signout', to: 'sessions#destroy', via: :delete
   match '/', to: 'static_pages#home'

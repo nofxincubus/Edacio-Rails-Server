@@ -16,6 +16,7 @@ class User < ActiveRecord::Base
 
   has_many :profile, dependent: :destroy
   has_many :connections, dependent: :destroy
+  has_many :notes, dependent: :destroy
   
   
 
@@ -27,6 +28,7 @@ class User < ActiveRecord::Base
                     uniqueness: { case_sensitive: true }
   validates :password, length: { minimum: 6 }
   validates :password_confirmation, presence: true
+
 
   private
 

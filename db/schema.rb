@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120320012013) do
+ActiveRecord::Schema.define(:version => 20120321213049) do
 
   create_table "connections", :force => true do |t|
     t.string   "linkid"
@@ -31,6 +31,16 @@ ActiveRecord::Schema.define(:version => 20120320012013) do
   end
 
   add_index "connections", ["user_id", "created_at"], :name => "index_connections_on_user_id_and_created_at"
+
+  create_table "notes", :force => true do |t|
+    t.string   "content"
+    t.string   "user_id"
+    t.integer  "connection_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  add_index "notes", ["user_id", "connection_id", "created_at"], :name => "index_notes_on_user_id_and_connection_id_and_created_at"
 
   create_table "profiles", :force => true do |t|
     t.string   "linkid"

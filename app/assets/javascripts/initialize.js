@@ -1,3 +1,4 @@
+
 //MAP UI by CALVIN PARK
 //Questions email me
 //use it all you want just be nice and mention me in your website
@@ -96,9 +97,9 @@ function displayConnectionInfo(){
 			if (selectedNode !== mapui.topFocus){
 				addNoteList();
 				var textTitle = document.getElementById('contacttitle');
-				var textArea = el('contacttextarea');
-				textArea.value = "";
-				textArea.focus();
+				//var textArea = el('contacttextarea');
+				//textArea.value = "";
+				//textArea.focus();
 				textTitle.textContent = "Notes about " + selectedNode.profile.name;
 				var plugdiv = document.getElementById("plugview");
 				plugging();
@@ -108,16 +109,17 @@ function displayConnectionInfo(){
 					$('#rightMenu').animate({
 					opacity: 1,
 					width: '250',
-					}, 700, function() {
+					}, 400, function() {
 					// Animation complete.
 					});
 				} 
 			} else {
+					selectedNode.deSelect();
 					if (document.getElementById('rightMenu').style.opacity > 0){
 						$('#rightMenu').animate({
 						opacity: 0,
 						width: '0',
-						}, 700, function() {
+						}, 400, function() {
 						// Animation complete.
 						});
 					}
@@ -128,17 +130,32 @@ function onMD(e){
 	var xM = mouseX(e);
 	var yM = mouseY(e);
 	var ymHeight = mapui.height;
-	if (mapui.selectedNode != 0 && xM > window.innerWidth-250){
+	if (selectedNode != 0 && xM > window.innerWidth-250){
 	} else {
 		selectedNode = mapui.SetDragged	(mouseX(e), mouseY(e));
+		var notelists = el('pastnotemenu');
 		if (selectedNode != 0){
+			selectedNode.isSelected();
+			// for Form
+			//el('conID').value = selectedNode.profile.id;
+			var liArray = $("#pastnotemenu li");
+			for (var i = 0;i < liArray.length;i++)
+				if (parseInt(liArray[i].id) === selectedNode.profile.id)
+					liArray[i].style.display = "block"
+				else
+					liArray[i].style.display = "none";
+					
 			displayConnectionInfo();
 		} else {
+			for (var i = 0;i < liArray.length;i++)
+				liArray[i].style.display = "none";
+			// for Form
+			//el('conID').value = "";
 			if (document.getElementById('rightMenu').style.opacity > 0){
 				$('#rightMenu').animate({
 					opacity: 0,
 					width: '0',
-					}, 700, function() {
+					}, 400, function() {
 					// Animation complete.
 					});
 			}
@@ -275,8 +292,16 @@ function onDragEvent(event){
 
 function addNotes(){
 	if (selectedNode !== 0){
-		var textArea = document.getElementById('contacttextarea');
+		var textArea = document.getElementById('textArea');
 		if (textArea.value.length > 1 || textArea.value != " " || textArea.value != "  "){
+			$.ajax({type:"POST",url:'/notes', dataType: "notes", data: 
+							  {"note":{"connection_id":selectedNode.profile.id,
+								"content":textArea.value}},
+								success: function(resp) {
+									
+            }});
+			
+			/*
 			var curdate = new Date();
 			var month = curdate.getMonth() + 1;
 			var day = curdate.getDate();
@@ -284,8 +309,10 @@ function addNotes(){
 			var hour = curdate.getHours();
 			var minutes = curdate.getMinutes();
 			var string = textArea.value +"  " + hour + ":" + minutes + " " + month + "/" + day + "/" + year;
-			selectedNode.profile.notes.push(string);
-			addNoteList();
+			$("#pastnotemenu").html("<%= escape_javascript(render("shared/notes")) %>");
+			*/
+			//selectedNode.profile.notes.push(string);
+			//addNoteList();
 		}
 		textArea.value = "";
 		//server side code to POST on database//
@@ -293,18 +320,7 @@ function addNotes(){
 }
 
 function addNoteList(){
-	var listdiv = el('pastnotemenu');
-		while (listdiv.childNodes.length > 0)
-			listdiv.removeChild(listdiv.childNodes[0]);
-
-
-	for (var i = 0;i < selectedNode.profile.notes.length;i++){
-		var listele = document.createElement('li');
-		var paraele = document.createElement('p');
-		paraele.textContent = selectedNode.profile.notes[i];
-		listele.appendChild(paraele);
-		listdiv.appendChild(listele);
-	}
+	
 	
 		//jquerystuff ///////////////
 		//Background color, mouseover and mouseout
@@ -487,5 +503,4 @@ function plugging() {
 			}
 	}
 }
-
 

@@ -1,8 +1,10 @@
-<%= provide(:title, 'First Time') %>
+<%= provide(:title, 'Sign in With Linkedin') %>
 <h1>First time</h1>
-
-<div class="row">
-  <h3> Sign in with Linked In </h3>
-  <%= oauth_login_button :value => "Login", :class => 'linkedin' %>
+<div class="center hero-unit">
+	<div class="row">
+		<h3> Sign in with Linked In </h3>
+		<button class = "btn"><%= link_to "Sign in with LinkedIn", auth_path %></button>
+	</div>
+</div>
 </div>
 

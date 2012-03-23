@@ -1,0 +1,10 @@
+<%= form_for(@notes) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+	<div id="noteaddbox">
+		<h3 id = "contacttitle"> </h3>
+		<%= f.hidden_field :connection_id, id: "conID" %>
+		<%= f.text_field :content, placeholder: "Compose new micropost..." %>
+		<%= f.submit "Post", class: "btn", style: "position:absolute; right:2px;bottom: 0px;" %>
+  </div>
+  
+<% end %>

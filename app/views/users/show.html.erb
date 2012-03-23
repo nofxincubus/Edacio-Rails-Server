@@ -30,17 +30,20 @@
 	</div>
 
 	<!-- adding notes -->
+	
+		
 	<div id="noteaddbox">
-		<h3 id="contacttitle">Other Name</h3>
-		<input id ="contacttextarea" ></input>
-		<button class ="btn" style="position:absolute;right:0px;bottom:5px" onClick="addNotes()">Add</button>
-	</div>
+		<h3 id = "contacttitle"> </h3>
+		<input type = "text" placeholder = "Write new notes..." id = "textArea"/>
+		<button class = "btn" onclick = "addNotes()" style= "position:absolute; right:2px;bottom: 0px;">Post</button>
+  </div>
+
+	
 	
 	<!-- notelist -->
-	<div id="notelist" >
-		<ul id="pastnotemenu">
-		</ul>
-	</div>
+	
+			<%= render :partial => "shared/notes" %>
+		
 </div>
 
 <div id="menulist">
@@ -60,6 +63,7 @@
 
 
 <%= javascript_tag :defer => 'defer' do %>
+
 	initialize();
 
 	//main profile

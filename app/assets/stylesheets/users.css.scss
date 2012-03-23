@@ -210,17 +210,17 @@ header {
 	border-width:1px;
 	cursor: pointer;
 	border-style:solid;
-	border-color:#000066;
+	border-color:#d7d7d7;
 	margin:5px 5px 3px 5px;
 	color: #FFF;
-	background:#33F;
+	background:#222;
 	text-align: center;
 }
 
 .btn:hover{
 	box-shadow:inset .8px 1.2px 2px #333;
 	background:#FFF;
-	color: #33F;
+	color: #d7d7d7;
 }
 
 #ui-datepicker-div, .ui-datepicker{ font-size: 80%; }

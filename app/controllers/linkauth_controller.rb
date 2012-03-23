@@ -40,7 +40,7 @@ class LinkauthController < ApplicationController
     else
       client.authorize_from_access(current_user.oauth_token, current_user.oauth_secret)
     end
-	 
+	 sign_in current_user
 	 redirect_to current_user
   end
 end
