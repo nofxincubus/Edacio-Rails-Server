@@ -7,8 +7,7 @@ class NotesController < ApplicationController
    def create
 		@note = current_user.notes.create!(params[:note])
 		if @note.save
-			@notelist = current_user.notes
-			render @notelist
+			render @note
 		 else
 		   @note_items = []
 		   render 'static_pages/home'

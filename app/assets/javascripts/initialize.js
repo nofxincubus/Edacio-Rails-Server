@@ -130,7 +130,7 @@ function onMD(e){
 	var xM = mouseX(e);
 	var yM = mouseY(e);
 	var ymHeight = mapui.height;
-	if (selectedNode != 0 && xM > window.innerWidth-250){
+	if (selectedNode != 0 && xM > window.innerWidth-260){
 	} else {
 		selectedNode = mapui.SetDragged	(mouseX(e), mouseY(e));
 		var liArray = $("#pastnotemenu li");
@@ -293,11 +293,11 @@ function addNotes(){
 	if (selectedNode !== 0){
 		var textArea = document.getElementById('textArea');
 		if (textArea.value.length > 1 || textArea.value != " " || textArea.value != "  "){
-			$.ajax({type:"POST",url:'/notes', dataType: "notes", data: 
+			$.ajax({type:"POST",url:'/notes', dataType: "html", data: 
 							  {"note":{"connection_id":selectedNode.profile.id,
 								"content":textArea.value}},
-								success: function(resp) {
-									
+								success: function(html) {
+									$("#pastnotemenu").append(html);
             }});
 			
 			/*
@@ -501,5 +501,14 @@ function plugging() {
 				document.getElementById("plugdesc").textContent = dayz + " days since you connected.";
 			}
 	}
+}
+
+function setPriority(type) {
+	if (selectedNode.profile.type != type) 
+		if (selectedNode != 0 && selectedNode != mapui.topFocus) {
+			selectedNode.profile.type = type;
+			liprof.setConnections(selectedNode.profile);
+			//Ajax to update connection!!
+		}
 }
 

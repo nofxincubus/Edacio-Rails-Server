@@ -24,9 +24,12 @@
 	<div id="contactprofile">
 		<img id="linkImage" src="/assets/tempme.png"/>
 		<h3 id="linkName" class = "whitetext"></h3>
+		<button id = "close" class = "selectbtn" onclick = "setPriority(1)">KeepClose</button>
+		<button id = "track" class = "selectbtn" onclick = "setPriority(2)">KeepTrack</button>
+		<button id = "touch" class = "selectbtn" onclick = "setPriority(3)">KeepTouch</button>
+		
 		<h3 id="linkTitle" class = "whitetext"></h3>
 		<h3 id="linkLocation" class = "whitetext"></h3>
-		<h3 id="linkStatus" class = "whitetext"></h3>
 	</div>
 
 	<!-- adding notes -->
@@ -41,9 +44,11 @@
 	
 	
 	<!-- notelist -->
-	
+	<div id="notelist" >
+		<ul id="pastnotemenu">
 			<%= render "shared/notes" %>
-		
+		</ul>
+	</div>
 </div>
 
 <div id="menulist">

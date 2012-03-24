@@ -223,6 +223,13 @@ header {
 	color: #d7d7d7;
 }
 
+.selectbtn {
+	border:1px;
+	cursor: pointer;
+	color: #FFF;
+	text-align: center;
+}
+
 #ui-datepicker-div, .ui-datepicker{ font-size: 80%; }
 
 .ui-timepicker-div .ui-widget-header { margin-bottom: 8px; }
@@ -256,5 +263,3 @@ header {
 #menulistul{list-style:none;padding:0;margin:0;top:0;position:absolute;height:100%;width:300px;z-index:inherit;}
 #menulistul li{padding:1px 0;text-align:left;display:block;cursor:hand;cursor:pointer;z-index:inherit;}
 #menulistul li p{color:#000;font-family:helvetica,arial,verdana;font-size:12px;font-weight:900;display:inline;padding:5px 8px 5px 5px;text-decoration:none;z-index:inherit;}
-
-
