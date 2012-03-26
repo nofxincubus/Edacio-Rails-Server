@@ -68,7 +68,7 @@ function initialize(){
 	rightAction = el('rightMenu');
 	rightAction.style.height = (h + 30) + "px";
 	
-
+	el('notelist').style.height = window.innerHeight - 353 + "px";
 	liprof = new LIProfile();
 	selectedNode =0;
 	onEF();
@@ -101,7 +101,6 @@ function displayConnectionInfo(){
 				//textArea.value = "";
 				//textArea.focus();
 				textTitle.textContent = "Notes about " + selectedNode.profile.name;
-				var plugdiv = document.getElementById("plugview");
 				plugging();
 				liprof.setConnections(selectedNode.profile);
 				actionitem.draw();
@@ -488,11 +487,6 @@ function addCommas(nStr)
 
 function plugging() {
 	if (selectedNode != mapui.topFocus){
-			var plugdiv = document.getElementById("plugview");
-			if (selectedNode.profile.getNotify())
-				plugdiv.style.background = "url(/assets/unplugged.png)";
-			else 
-				plugdiv.style.background = "url(/assets/plugged.png)";
 			if (selectedNode.profile.lastConnected === 0)
 				document.getElementById("plugdesc").textContent = "Never!"
 			else{

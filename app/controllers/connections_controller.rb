@@ -15,8 +15,9 @@ class ConnectionsController < ApplicationController
 	end
 
 	def destroy
-		
 		@connection = current_user.connections.find(params[:id])
+		@notes = current_user.notes.find_by_connection_id(@connection.id)
+		@notes.destroy
 		@connection.destroy
 		respond_to do |format|
 			format.json { render :json => { :response => "deleted" }.to_json }

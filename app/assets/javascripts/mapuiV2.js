@@ -461,7 +461,7 @@ MapUI.prototype.dropNode = function(b,a, selected, firstindex){
 								"status":foci.profile.currentStatus,
 								"tags":foci.profile.permanantTag,
 								"priority":foci.profile.type,
-								"parent_id":0,
+								"parent_id":this.currentFocus.profile.id,
 								"last_contacted":0}}, 
 								success: function(resp) {
 									if (eoifjdkjfelfiejfkjdf != -100) alert("somethings up");

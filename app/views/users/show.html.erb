@@ -24,20 +24,23 @@
 	<div id="contactprofile">
 		<img id="linkImage" src="/assets/tempme.png"/>
 		<h3 id="linkName" class = "whitetext"></h3>
-		<button id = "close" class = "selectbtn" onclick = "setPriority(1)">KeepClose</button>
-		<button id = "track" class = "selectbtn" onclick = "setPriority(2)">KeepTrack</button>
-		<button id = "touch" class = "selectbtn" onclick = "setPriority(3)">KeepTouch</button>
-		
 		<h3 id="linkTitle" class = "whitetext"></h3>
 		<h3 id="linkLocation" class = "whitetext"></h3>
 	</div>
+	<div id="contactreminder">
+		<button id = "onetime" class = "selectbtn" onclick = "setPriority(1)">One Time</button>
+		<button id = "recurring" class = "selectbtn" onclick = "setPriority(2)">Recurring</button>
+	</div>
+	<div id="contactaction">
+	</div>
+
 
 	<!-- adding notes -->
 	
 		
 	<div id="noteaddbox">
 		<h3 id = "contacttitle"> </h3>
-		<input type = "text" placeholder = "Write new notes..." id = "textArea"/>
+		<input type = "text" placeholder = "Write new notes..." id = "textArea" style= "position:absolute; left:0px; top:20px;"/>
 		<button class = "btn" onclick = "addNotes()" style= "position:absolute; right:2px;bottom: 0px;">Post</button>
   </div>
 

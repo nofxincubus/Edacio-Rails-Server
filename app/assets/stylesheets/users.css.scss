@@ -97,7 +97,36 @@ left:0px;
 	background-size:contain;
 	background-repeat:no-repeat;
 	right:0px;
-	top:150px;
+	top:76px;
+	opacity:1;
+	z-index:2;
+	-moz-border-radius: 0px;
+	border-radius: 0px;
+}
+#contactreminder {
+	width:250px;
+	height:30px;
+	position:absolute;
+	background:#444;
+	background-size:contain;
+	background-repeat:no-repeat;
+	right:0px;
+	top:137px;
+	opacity:1;
+	z-index:2;
+	-moz-border-radius: 0px;
+	border-radius: 0px;
+}
+
+#contactaction {
+	width:250px;
+	height:42px;
+	position:absolute;
+	background:#444;
+	background-size:contain;
+	background-repeat:no-repeat;
+	right:0px;
+	top:167px;
 	opacity:1;
 	z-index:2;
 	-moz-border-radius: 0px;
@@ -127,24 +156,20 @@ left:0px;
 ///Plug picture
 #plugview{
 	width:250px;
-	height:110px;
+	height:13px;
 	position:absolute;
-	background:url(plugged.png);
-	background-repeat:no-repeat;
-	background-size:cover;
 	right:-1px;
-	top:50px;
+	top:61px;
 	opacity:1;
 	z-index:3;
+	text-align:center;
 }
 
 #plugdesc{
 	vertical-align:center;
-	position:relative;
-	top:30px;
-	left:70px;
-	font-size:9px;
-	max-width:190px;
+	text-align:center;
+	font-size:12px;
+	max-width:250px;
 }
 //////////////
 
@@ -154,7 +179,7 @@ left:0px;
 	position:absolute;
 	width:250px;
 	height:100px;
-	bottom:250px;
+	top:211px;
 	right:0px;
 	opacity:1;
 	zIndex:3;
@@ -226,6 +251,15 @@ header {
 .selectbtn {
 	border:1px;
 	cursor: pointer;
+	background: #333;
+	color: #FFF;
+	text-align: center;
+}
+
+.selectbtn:hover {
+	border:1px;
+	cursor: pointer;
+	background: #555;
 	color: #FFF;
 	text-align: center;
 }

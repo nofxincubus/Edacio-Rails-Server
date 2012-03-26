@@ -5,12 +5,12 @@
 // Use it all you want just put on your site that you are using my stuff :)
 
 function ActionItem() {
-	this.div = document.getElementById('contactprofile');
+	this.div = document.getElementById('contactaction');
 	
-	this.iconSize = 190/6-7;
+	this.iconSize = 250/6;
 	
-	var leftoffset = 6;
-	var topoffset = 30;
+	var leftoffset = 0;
+	var topoffset = 1;
 	
 	this.email = document.createElement('img');
 	this.email.setAttribute('src',"/assets/email.png");
@@ -19,7 +19,7 @@ function ActionItem() {
 	this.email.style.width = this.iconSize + "px";
 	this.email.style.height = this.iconSize + "px";
 	this.email.style.zIndex = "10";
-	this.email.style.right = leftoffset + "px";
+	this.email.style.left = leftoffset + "px";
 	this.email.style.top = topoffset + "px";
 
 	this.call = document.createElement('img');
@@ -29,7 +29,7 @@ function ActionItem() {
 	this.call.style.width = this.iconSize + "px";
 	this.call.style.height = this.iconSize + "px";
 	this.call.style.zIndex = "10";
-	this.call.style.right = leftoffset*2 + this.iconSize + "px";
+	this.call.style.left = leftoffset*2 + this.iconSize + "px";
 	this.call.style.top = topoffset + "px";
 
 	this.txt = document.createElement('img');
@@ -39,7 +39,7 @@ function ActionItem() {
 	this.txt.style.width = this.iconSize + "px";
 	this.txt.style.height = this.iconSize + "px";
 	this.txt.style.zIndex = "10";
-	this.txt.style.right = leftoffset*3 + this.iconSize*2 + "px";
+	this.txt.style.left = leftoffset*3 + this.iconSize*2 + "px";
 	this.txt.style.top = topoffset + "px";
 
 	this.lunch = document.createElement('img');
@@ -49,7 +49,7 @@ function ActionItem() {
 	this.lunch.style.width = this.iconSize + "px";
 	this.lunch.style.height = this.iconSize + "px";
 	this.lunch.style.zIndex = "inherit";
-	this.lunch.style.right = leftoffset*4 + this.iconSize*3 + "px";
+	this.lunch.style.left = leftoffset*4 + this.iconSize*3 + "px";
 	this.lunch.style.top = topoffset + "px";
 	
 	this.coffee = document.createElement('img');
@@ -59,7 +59,7 @@ function ActionItem() {
 	this.coffee.style.width = this.iconSize + "px";
 	this.coffee.style.height = this.iconSize + "px";
 	this.coffee.style.zIndex = "inherit";
-	this.coffee.style.right = leftoffset*5 + this.iconSize*4 + "px";
+	this.coffee.style.left = leftoffset*5 + this.iconSize*4 + "px";
 	this.coffee.style.top = topoffset + "px";
 	
 	this.meeting = document.createElement('img');
@@ -69,7 +69,7 @@ function ActionItem() {
 	this.meeting.style.width = this.iconSize + "px";
 	this.meeting.style.height = this.iconSize + "px";
 	this.meeting.style.zIndex = "inherit";
-	this.meeting.style.right = leftoffset*6+ this.iconSize*5 + "px";
+	this.meeting.style.left = leftoffset*6+ this.iconSize*5 + "px";
 	this.meeting.style.top = topoffset + "px";
 	
 	this.div.appendChild(this.email);
