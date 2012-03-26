@@ -1,26 +1,25 @@
 <% provide(:title, 'Social Network Trainer') %>
-
-<div class="center hero-unit">
-	<h1>Edacio</h1>
-	
-   <h2>Edacio is the best way to learn to network and strengthen your existing relationships. <h2>
-	
-	<div class="slider-wrapper theme-default">
-		<div class="ribbon"></div>
-		<div id="slider" class="nivoSlider">
-		    <%= link_to image_tag("integration.png", alt: "Integration",title:"Integration"), '' %>
-		    <%= link_to image_tag("organization.png", alt: "Integration",title:"Organization"), '' %>
-		    <%= link_to image_tag("training.png", alt: "Integration",title:"Training"), '' %>
-		    <%= link_to image_tag("visualization.png", alt: "Integration",title:"Visualization"), '' %>
+	<div class = "center">
+	</br>
+	<h2 style = "color:#222;font-size:20px;">The best way to learn to network and strengthen your existing relationships. </h2>
+		<div class="slider-wrapper theme-default">
+			<div class="ribbon"></div>
+			<div id="slider" class="nivoSlider">
+				 <%= link_to image_tag("training.png", alt: "Training",title:"Learn how to be an amazing networker"), '' %>
+				 <%= link_to image_tag("organization.png", alt: "Organize",title:"Organize and manage all your contacts"), '' %>
+				 <%= link_to image_tag("visualization.png", alt: "Visualize",title:"Setup private notes and reoccuring reminders"), '' %>
+				 <%= link_to image_tag("integration.png", alt: "Integrate",title:"Integrates with Facebook, Google+, and Linkedin"), '' %>
+			<!-- Forgetting to stay in touch with professional contacts and friends?-->
+			</div>
+			<div id="htmlcaption" class="nivo-html-caption">
+				 <strong>This</strong> is an example of a <em>HTML</em> caption with <a href="#">a link</a>.
+			</div>
 		</div>
-		<div id="htmlcaption" class="nivo-html-caption">
-		    <strong>This</strong> is an example of a <em>HTML</em> caption with <a href="#">a link</a>.
-		</div>
-	</div>
-
+	</div
    <h2><br/><br/><h2>
-	<%= link_to "Sign up now!", signup_path, class: "btn btn-large btn-primary" %>
-</div>
+	<h2><%= link_to "Sign up now!", signup_path, class: "btnmain btn-primary btn-large" %></h2>
+   
+
 
 
 <script type="text/javascript">

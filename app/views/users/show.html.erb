@@ -82,8 +82,11 @@
 	var linnnk = [];
 	var x;
 	<% @cont.each do |order| %>
-		x = new connectionProfile(0,"<%= order[0] %>","<%= order[1] %>","<%= order[2] %>","<%= order[3] %>","<%= order[4] %>","<%= order[5] %>","<%= order[6] %>");
-		linnnk.push(x);
+		var name = "<%= order[2] %>";
+		if (name.indexOf("private") === -1){
+			x = new connectionProfile(0,"<%= order[0] %>","<%= order[1] %>","<%= order[2] %>","<%= order[3] %>","<%= order[4] %>","<%= order[5] %>","<%= order[6] %>");
+			linnnk.push(x);
+		}
 	<% end %>
 	mapui.menu.addLinked(linnnk);
 	
@@ -93,17 +96,17 @@
 	var foci;
 	var paraFoci;
 	<% @connections.each do |b| %>
-		z = new connectionProfile(<%= b[0] %>,"<%= b[1] %>","<%= b[2] %>","<%= b[3] %>","<%= b[4] %>","<%= b[5] %>","<%= b[6] %>","<%= b[7] %>");
-		z.tag = "<%= b[8] %>";
-		z.priority = <%= b[9] %>;
-		if (<%= b[10] %> == 0){
-			foci = new Focus(z,mapui.topFocus);
-			mapui.topFocus.children.push(foci);
-		}else {
-			paraFoci = mapui.topFocus.returnMatchFocus(<%= b[10] %>)
-			foci = new Focus(z,paraFoci);
-			paraFoci.children.push(foci);
-		}
+			z = new connectionProfile(<%= b[0] %>,"<%= b[1] %>","<%= b[2] %>","<%= b[3] %>","<%= b[4] %>","<%= b[5] %>","<%= b[6] %>","<%= b[7] %>");
+			z.tag = "<%= b[8] %>";
+			z.priority = <%= b[9] %>;
+			if (<%= b[10] %> == 0){
+				foci = new Focus(z,mapui.topFocus);
+				mapui.topFocus.children.push(foci);
+			}else {
+				paraFoci = mapui.topFocus.returnMatchFocus(<%= b[10] %>)
+				foci = new Focus(z,paraFoci);
+				paraFoci.children.push(foci);
+			}
 	<% end %>
 	mapui.drawAll(svg);
 <% end %>

@@ -1,5 +1,6 @@
 class NotesController < ApplicationController
   before_filter :signed_in_user, only: [:create, :index, :destroy]
+  before_filter :correct_user,   only: :destroy
 	def index
 		@notes = current_user.notes
 	end	
@@ -16,6 +17,7 @@ class NotesController < ApplicationController
 
   def destroy
 		@note.destroy
+		render @note
   end
 
 	private
@@ -23,4 +25,8 @@ class NotesController < ApplicationController
 		   store_location
 		   redirect_to signin_path, notice: "Please sign in." unless signed_in?
     	end
+		def correct_user
+		   @note = current_user.notes.find_by_id(params[:id])
+		   redirect_to current_user if @note.nil?
+    end
 end

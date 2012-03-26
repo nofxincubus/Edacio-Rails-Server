@@ -40,8 +40,9 @@ function initialize(){
 	var mousewheelevt=(/Firefox/i.test(navigator.userAgent))? "DOMMouseScroll" : "mousewheel" //FF doesn't recognize mousewheel as of FF3.x
 	
 	//Firefox's stupidest compatibility test
-	if (/Firefox/i.test(navigator.userAgent))
+	if (/Firefox/i.test(navigator.userAgent)){
 		document.addEventListener(mousewheelevt, onSC, false);
+	}
 	else if (document.attachEvent) //if IE (and Opera depending on user setting)
 		document.attachEvent("on"+mousewheelevt, onSC);
 	else if (document.addEventListener) //WC3 browsers
@@ -53,7 +54,10 @@ function initialize(){
 	document.addEventListener("touchend",	onMU, false);
 	document.addEventListener("touchmove",	onMM, false);
 	eoifjdkjfelfiejfkjdf = -100;
-	h = window.innerHeight - 70;
+	if (/Firefox/i.test(navigator.userAgent))
+		h = window.innerHeight - 90;
+	else
+		h = window.innerHeight - 70;
 	w = window.innerWidth;
 	hw=w/2;
 	hh = h - 300;

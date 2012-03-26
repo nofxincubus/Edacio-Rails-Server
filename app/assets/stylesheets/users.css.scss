@@ -232,7 +232,7 @@ header {
 
 .btn {
 	border-radius: 3px;
-	border-width:1px;
+	border-width:0px;
 	cursor: pointer;
 	border-style:solid;
 	border-color:#d7d7d7;
@@ -240,13 +240,11 @@ header {
 	color: #FFF;
 	background:#222;
 	text-align: center;
+	text-decoration:none;
+	background-image: -webkit-linear-gradient(top, rgb(200, 200, 200), rgb(100, 100, 100));
 }
 
-.btn:hover{
-	box-shadow:inset .8px 1.2px 2px #333;
-	background:#FFF;
-	color: #d7d7d7;
-}
+
 
 .selectbtn {
 	border:1px;

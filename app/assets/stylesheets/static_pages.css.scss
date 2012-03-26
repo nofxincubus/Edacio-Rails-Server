@@ -5,3 +5,30 @@
 .navbar-inner {
 	height: 40px;
 }
+
+
+
+.homeback {
+	width: inherit;
+	background : #111;
+}
+
+.btnmain {
+	border-radius: 15px;
+	border-width:0px;
+	cursor: pointer;
+	border-style:solid;
+	border-color:#888;
+	margin:37px 40px 37px 40px;
+	color: #FFF;
+	font-size: 30px;
+	background:#888;
+	text-align: center;
+	text-decoration:none;
+	background-image: -webkit-linear-gradient(top, rgb(200, 200, 200), rgb(100, 100, 100));
+}
+
+.btnmain:hover{
+	color: #FFF;
+	text-decoration:none;
+}

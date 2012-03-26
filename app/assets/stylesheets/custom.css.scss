@@ -54,15 +54,17 @@ h1 {
   letter-spacing: -2px;
   margin-bottom: 30px;
   text-align: center;
+	
 }
 
 h2 {
-  font-size: 1.7em;
   letter-spacing: -1px;
   margin-bottom: 30px;
   text-align: center;
-  font-weight: normal;
-  color: #999;
+	color:#222;
+	font-size:20px;
+  font-weight: bold;
+	text-shadow: 1px 2px 6px #333;
 }
 
 p {
@@ -167,10 +169,12 @@ input, textarea, select, .uneditable-input {
 .theme-default #slider {
     margin:20px auto 0 auto;
     width:600px; /* Make sure your images are the same size */
-    height:400px; /* Make sure your images are the same size */
+    height:390px; /* Make sure your images are the same size */
 }
 
 .theme-pascal.slider-wrapper,
 .theme-orman.slider-wrapper {
     margin-top:150px;
 }
+
+

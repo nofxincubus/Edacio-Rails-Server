@@ -38,12 +38,12 @@ function JoshuaMenu(w, h, x, y ){
 
 JoshuaMenu.prototype.initialize = function() {
 	
-	this.profileList.push(new connectionProfile(0,0,"/assets/company.png","Institution","","","",""));
-	this.profileList.push(new connectionProfile(0,0,"/assets/investor.png","Investor","","","",""));
-	this.profileList.push(new connectionProfile(0,0,"/assets/artist.png","Designer","","","",""));
-	this.profileList.push(new connectionProfile(0,0,"/assets/programmer.png","Programmer","","","",""));
-	this.profileList.push(new connectionProfile(0,0,"/assets/blankcategory.png","New Category","","","",""));
-	this.profileList.push(new connectionProfile(0,0,"/assets/blankcontact.png","New Contact","","","",""));
+	this.profileList.push(new connectionProfile(0,0,"/assets/company.png","Institutions","","","",""));
+	this.profileList.push(new connectionProfile(0,0,"/assets/investor.png","Investors","","","",""));
+	this.profileList.push(new connectionProfile(0,0,"/assets/artist.png","Designers","","","",""));
+	this.profileList.push(new connectionProfile(0,0,"/assets/programmer.png","Programmers","","","",""));
+	this.profileList.push(new connectionProfile(0,0,"/assets/blankcontact.png","New Category","","","",""));
+	this.profileList.push(new connectionProfile(0,0,"/assets/blankcategory.png","New Contact","","","",""));
 	/*
 	for (var i = 0;i < 40;i++)
 		this.profileList.push(new connectionProfile(0,"blankcontact.png","New Contact" + i,"","","",""));
