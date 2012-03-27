@@ -26,7 +26,7 @@ function connectionProfile(id,linkid, picURL, name, title, location, currentStat
 	// 1. Stay Close
 	 // 2. Keep Track
 	//  3. Keep in touch
-	this.type = 999;
+	this.priority = 999;
 	//add Notes and shit
 	this.notes = [];
 	this.permanantTag = "";
@@ -73,7 +73,7 @@ connectionProfile.prototype.getNotify = function(){
 		x = parseInt(this.lastConnected);
 	else
 		x = 0;
-	if (x < this.type)
+	if (x < this.priority)
 		return false;
 	else
 		return true;

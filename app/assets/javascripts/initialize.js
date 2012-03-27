@@ -121,7 +121,7 @@ function displayConnectionInfo(){
 				else if (selectedNode.profile.priority === 182)
 					el('option6').selected = "selected";
 				var rateSelector = el('selectrate');
-				rateSelector.selected = selectedNode.profile.type;
+				rateSelector.selected = selectedNode.profile.priority;
 				plugging();
 				liprof.setConnections(selectedNode.profile);
 				actionitem.draw();
@@ -539,9 +539,9 @@ function plugging() {
 }
 
 function setPriority(type) {
-	if (selectedNode.profile.type != type) 
+	if (selectedNode.profile.priority != type) 
 		if (selectedNode != 0 && selectedNode != mapui.topFocus) {
-			selectedNode.profile.type = type;
+			selectedNode.profile.priority = type;
 			liprof.setConnections(selectedNode.profile);
 			//Ajax to update connection!!
 		}

@@ -412,7 +412,7 @@ MapUI.prototype.dropNode = function(b,a, selected, firstindex){
 								"linkurl":foci.profile.publicURL,
 								"status":foci.profile.currentStatus,
 								"tags":foci.profile.permanantTag,
-								"priority":foci.profile.type,
+								"priority":foci.profile.priority,
 								"parent_id":this.currentFocus.children[i].profile.id,
 								"last_contacted":0}}, 
 								success: function(resp) {
@@ -460,7 +460,7 @@ MapUI.prototype.dropNode = function(b,a, selected, firstindex){
 								"linkurl":foci.profile.publicURL,
 								"status":foci.profile.currentStatus,
 								"tags":foci.profile.permanantTag,
-								"priority":foci.profile.type,
+								"priority":foci.profile.priority,
 								"parent_id":this.currentFocus.profile.id,
 								"last_contacted":0}}, 
 								success: function(resp) {
