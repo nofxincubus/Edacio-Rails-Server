@@ -24,7 +24,7 @@ function MapUI(w, h,csvg){
 	this.lines =[];
 	this.doCircle = false;
 
-	this.menu = new JoshuaMenu(200,window.innerHeight-40,0,40);
+	this.menu = new JoshuaMenu(200,window.innerHeight-60,0,40);
 	this.oldmenu = new DivMenu(window.innerWidth-250,30,40,200);
 };
 

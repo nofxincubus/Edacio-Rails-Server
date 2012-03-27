@@ -72,7 +72,7 @@ function initialize(){
 	rightAction = el('rightMenu');
 	rightAction.style.height = (h + 30) + "px";
 	
-	el('notelist').style.height = window.innerHeight - 353 + "px";
+	el('notelist').style.height = window.innerHeight - 370 + "px";
 	liprof = new LIProfile();
 	selectedNode =0;
 	onEF();
@@ -555,3 +555,17 @@ function selectRecur() {
 									selectedNode.profile.priority = parseInt(resp['response']);
            	 }});
 }
+
+//// Don't scroll when its smaller
+//// Use linkedin button
+//// enter to post
+//// Edacio Reminders
+//// Recurring Calendar reminder
+//// divmenu change size on hover
+//// line to drag with the face
+//// Pop out to parent when every children is deleted
+//// Fix selection Error
+//// LIProfile to link to linkedin
+//// Calendar title
+//// Analytics
+//// Feedback
