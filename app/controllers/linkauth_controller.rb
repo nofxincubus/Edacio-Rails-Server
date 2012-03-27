@@ -3,7 +3,8 @@ class LinkauthController < ApplicationController
 	def index
 	if current_user.oauth_token.nil?
 		 # get your api keys at https://www.linkedin.com/secure/developer
-		 client = LinkedIn::Client.new("iqfy4iibw74f", "TV56YgxsI1jHwULj")
+		 #client = LinkedIn::Client.new("iqfy4iibw74f", "TV56YgxsI1jHwULj") For 0.0.0.0
+		 client = LinkedIn::Client.new("y6wnoxfgc8ir", "UiQ62mvpZdQ0dExN")
 		 request_token = client.request_token(:oauth_callback => 
 		                                   "http://#{request.host_with_port}/auth/callback")
 		 session[:rtoken] = request_token.token
@@ -16,7 +17,8 @@ class LinkauthController < ApplicationController
   end
 
   def callback
-    client = LinkedIn::Client.new("iqfy4iibw74f", "TV56YgxsI1jHwULj")
+		client = LinkedIn::Client.new("y6wnoxfgc8ir", "UiQ62mvpZdQ0dExN")
+    #client = LinkedIn::Client.new("iqfy4iibw74f", "TV56YgxsI1jHwULj") For 0.0.0.0
     if current_user.oauth_token.nil?
       pin = params[:oauth_verifier]
       atoken, asecret = client.authorize_from_request(session[:rtoken], session[:rsecret], pin)

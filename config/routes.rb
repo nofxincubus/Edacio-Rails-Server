@@ -19,6 +19,7 @@ Edacioserver::Application.routes.draw do
   match '/userselect',  to: 'users#select'
   match '/contime', to: 'connections#gettime'
   match '/auth/callback',  to: 'linkauth#callback'
+  match '/feedback', to: 'static_pages#feedback'
   match '/signout', to: 'sessions#destroy', via: :delete
   match '/', to: 'static_pages#home'
   # The priority is based upon order of creation:

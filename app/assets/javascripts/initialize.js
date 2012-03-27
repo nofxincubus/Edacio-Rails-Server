@@ -567,6 +567,3 @@ function selectRecur() {
            	 }});
 }
 
-
-//// Analytics
-//// Feedback
