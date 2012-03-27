@@ -305,25 +305,47 @@ select {
 	
 }
 
-::-webkit-scrollbar {
+#menulist::-webkit-scrollbar {
    width: 12px;
 	opacity : 0;
 	background: rgba(0,0,0,0); 
 }
  
 /* Track */
-::-webkit-scrollbar-track {
+#menulist::-webkit-scrollbar-track {
     -webkit-border-radius: 10px;
     border-radius: 10px;
 	opacity :0.8;
 	background: #222; 
 }
-::-webkit-scrollbar-track-piece {
+#menulist::-webkit-scrollbar-track-piece {
 	opacity :0.8;
 	background: #222;
 }
 /* Handle */
-::-webkit-scrollbar-thumb {
+#menulist::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.5); 
+}
+
+-moz-appearance::scrollbar {
+	
+   width: 12px;
+	opacity : 0;
+	background: rgba(0,0,0,0); 
+}
+ 
+/* Track */
+-moz-appearance::scrollbartrack {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+	opacity :0.8;
+	background: #222; 
+}
+
+/* Handle */
+-moz-appearance::scrollbarthumb{
     -webkit-border-radius: 10px;
     border-radius: 10px;
     background: rgba(255,255,255,0.5); 

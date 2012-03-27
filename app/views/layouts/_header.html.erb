@@ -5,27 +5,17 @@
           <%= link_to "    Social Network Trainer", '#', id: "logo" %>
           <nav>
             <ul class="nav pull-right">
-              <li><%= link_to "Home",    root_path %></li>
-				  <li><%= link_to "About",    about_path %></li>
-				  <li><%= link_to "FeedBack",    feedback_path %></li>
-				  <li><%= link_to "Demo", "http://www.edacio.com" %></li>
+              <li id = "headerli"><%= link_to "Home",    root_path %></li>
+				  <li id = "headerli"><%= link_to "About",    about_path %></li>
+				  <li id = "headerli"><%= link_to "Feedback", "mailto:Feedback.Edacio@gmail.com?Subject=Edacio%20Question", :target => "_blank" %></li>
                <% if signed_in? %>    
-				      <li id="fat-menu" class="dropdown">
-				        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-				          Account <b class="caret"></b>
-				        </a>
-				        <ul class="dropdown-menu">
-				          <li><%= link_to "Profile", current_user %></li>
-				          <li><%= link_to "Settings", '#' %></li>
-				          <li class="divider"></li>
-				          <li>
-				            <%= link_to "Sign out", signout_path, method: "delete" %>
-				          </li>
-				        </ul>
+						<li id = "headerli"><%= link_to "Battle Map", current_user %></li>
+						<li id = "headerli">
+				      <%= link_to "Sign out", signout_path, method: "delete" %>
 				      </li>
 				    <% else %>
-				      <li><%= link_to "Sign in", signin_path %></li>
-                  <li><%= link_to "Signup", signup_path %></li>
+				      <li id = "headerli"><%= link_to "Sign in", signin_path %></li>
+                  <li id = "headerli"><%= link_to "Signup", signup_path %></li>
 				    <% end %>
 						
             </ul>
@@ -33,3 +23,4 @@
 
       </div>
     </header>
+
