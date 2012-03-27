@@ -118,17 +118,25 @@ Appointment.prototype.removeAll = function(){
 }
 Appointment.prototype.setDetail = function(top, childBool){
 	var strDetail = "Make " + this.title + " appointment with ";
+	var strNewTitle = this.title + " appointment with : ";
 	if (childBool){
 			strDetail +=  top.profile.name + " : ";
+			strNewTitle +=  top.profile.name + " ";
 		for (var i = 0;i < top.children.length;i++){
-			if (i === top.children.length-1)
-				strDetail += "and " + top.children[i].profile.name + ".";	
-			else 
-				strDetail += top.children[i].profile.name + ", ";
+			if (i === top.children.length-1) {
+				strDetail += " and " + top.children[i].profile.name + ".";
+				strNewTitle += " and " + top.children[i].profile.name;
+			}
+			else {
+				strDetail += ", " + top.children[i].profile.name;
+				strNewTitle += ", " + top.children[i].profile.name;
+			}
 		}
 	} else {
 		strDetail += top.profile.name;
+
 	}
+	this.title = strNewTitle;
 	this.detailInput = strDetail;
 }
 

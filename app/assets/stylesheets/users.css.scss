@@ -142,7 +142,7 @@ left:0px;
 }
 
 .greytext {
-	color:#888;
+	color:#FFF;
 }
 
 .whitetext {
@@ -167,6 +167,7 @@ left:0px;
 	opacity:1;
 	z-index:3;
 	text-align:center;
+	background:#444;
 }
 
 #plugdesc{
@@ -280,17 +281,6 @@ header {
 
 .ui-tpicker-grid-label { background: none; border: none; margin: 0; padding: 0; }
 
-#eventmaker {
-	width:300px;
-	height:330px;
-	z-index:5;
-	position:absolute;
-	left:300px;
-	top: 100px;
-	background:#39F;
-	-moz-border-radius: 0px;
-	border-radius: 0px;
-}
 
 #pastnotemenu{width:100%;list-style:none;padding:0;margin:0;top:0;position:absolute;height:100%;width:300px;z-index:inherit;}
 #pastnotemenu li{padding:4px 0;text-align:left;display:block;cursor:hand;cursor:pointer;z-index:inherit;}
@@ -310,3 +300,31 @@ select {
    background: -webkit-linear-gradient(top, rgb(200, 200, 200), rgb(100, 100, 100));
 	color: #000;
  }
+
+#menulist {
+	
+}
+
+::-webkit-scrollbar {
+   width: 12px;
+	opacity : 0;
+	background: rgba(0,0,0,0); 
+}
+ 
+/* Track */
+::-webkit-scrollbar-track {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+	opacity :0.8;
+	background: #222; 
+}
+::-webkit-scrollbar-track-piece {
+	opacity :0.8;
+	background: #222;
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.5); 
+}

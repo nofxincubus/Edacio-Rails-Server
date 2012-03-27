@@ -160,21 +160,25 @@ DivMenu.prototype.resetGrid=function(){
 				var newImg = document.createElement('img');
 				newImg.setAttribute('src',this.profileList[k].picURL);
 				newImg.setAttribute('draggable','true');
+
+				var length;
 					//change to pics here PICS
 					//add text for people's names
 					if (0.8*wid < 0.8*hei) {
 						newImg.setAttribute('WIDTH',wid);
 						newImg.setAttribute('HEIGHT',wid);
+						length = wid;
 						var xup = (wc)*i + 3;
 						var yup = (hc)*j +  hc*0.5 - 0.5*wid;
-						var styleText = 'position:absolute; top:' + yup + "px; left:" +xup + 'px; z-index:2';
+						var styleText = 'position:absolute; top:' + yup + "px; left:" +xup + 'px; z-index:5';
 						newImg.setAttribute('style',styleText);
 					} else {
 						newImg.setAttribute('WIDTH',hei);
 						newImg.setAttribute('HEIGHT',hei);
+						length = hei;
 						var xup = (this.width/this.nodex)*i +  0.5*wc - 0.5*hei;
 						var yup = (this.height/this.nodey)*j +  hborder;
-						var styleText = 'position:absolute; top:' + yup + "px; left:" +xup + 'px; z-index:2';
+						var styleText = 'position:absolute; top:' + yup + "px; left:" +xup + 'px; z-index:5';
 						newImg.setAttribute('style',styleText);
 					}
 				rn=Math.floor(Math.random()*11)/10;
@@ -182,6 +186,10 @@ DivMenu.prototype.resetGrid=function(){
 				yy = (hc)*j + this.y + hc*0.5 +rn*5;
 				newImg.setAttribute('ondragstart','onDragEvent(event)');
 				this.frameDiv.appendChild(newImg);
+				newImg.id = "divmenuitem" + k;
+				newImg.setAttribute('onmouseover', "evt.target.style.width = '50px';evt.target.style.height = '50px';");
+				newImg.setAttribute('onmouseout',"evt.target.style.width = '"+ length + "px';evt.target.style.height = '"+ length + "px';");
+
 				k++;
 			}
 		}

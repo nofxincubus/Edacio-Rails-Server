@@ -14,6 +14,7 @@ function LIProfile() {
 	this.oneTimeButton = document.getElementById('onetime');
 	this.recurSelect = document.getElementById('recurselect');
 	this.wrapdiv = document.getElementById('contactprofile');
+	this.imageLinkATag = document.getElementById('linkImageA');
 	this.wrapdiv.style.zIndex = 3;
 	this.wrapdiv.style.overflow = "hidden";
 	this.reposition();
@@ -25,6 +26,8 @@ LIProfile.prototype.setConnections = function(profile) {
 	this.name = profile.name;
 	this.location = profile.location;
 	this.title = profile.title;
+	var pURL = profile.publicURL.replace(/amp;/gi, "");
+	this.imageLinkATag.href = pURL;
 	this.buildDiv();
 }
 

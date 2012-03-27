@@ -24,7 +24,7 @@ function MapUI(w, h,csvg){
 	this.lines =[];
 	this.doCircle = false;
 
-	this.menu = new JoshuaMenu(200,window.innerHeight-60,0,40);
+	this.menu = new JoshuaMenu(200,window.innerHeight-40,0,40);
 	this.oldmenu = new DivMenu(window.innerWidth-250,30,40,200);
 };
 
@@ -368,6 +368,8 @@ MapUI.prototype.StopDragging=function(b,a){
 									alert(resp['response']);
            	 }});
 					this.currentFocus.children.splice(i,1);
+					if (this.currentFocus.children.length === 0 && this.currentFocus != this.topFocus)
+						this.currentFocus = this.currentFocus.parent;
 					this.dragged = false;
 					return true;
 				}
@@ -416,12 +418,13 @@ MapUI.prototype.dropNode = function(b,a, selected, firstindex){
 								"parent_id":this.currentFocus.children[i].profile.id,
 								"last_contacted":0}}, 
 								success: function(resp) {
-									if (eoifjdkjfelfiejfkjdf != -100) alert("somethings up");
 					 				eoifjdkjfelfiejfkjdf = resp['response'];
 									selectedNode.setID(parseInt(eoifjdkjfelfiejfkjdf));
 									eoifjdkjfelfiejfkjdf = -100;
             }});
 					this.currentFocus.children[i].children.push(foci);
+					if (selectedNode != 0)
+						selectedNode.deSelect();
 					selectedNode = foci;
 					selectedNode.isSelected();
 					displayConnectionInfo();
@@ -464,13 +467,14 @@ MapUI.prototype.dropNode = function(b,a, selected, firstindex){
 								"parent_id":this.currentFocus.profile.id,
 								"last_contacted":0}}, 
 								success: function(resp) {
-									if (eoifjdkjfelfiejfkjdf != -100) alert("somethings up");
 					 				eoifjdkjfelfiejfkjdf = resp['response'];
 									selectedNode.setID(parseInt(eoifjdkjfelfiejfkjdf));
 									eoifjdkjfelfiejfkjdf = -100;
             } });
 
 				this.currentFocus.children.push(foci);	
+				if (selectedNode != 0)
+					selectedNode.deSelect();
 				selectedNode = foci;
 				selectedNode.isSelected();
 				displayConnectionInfo();

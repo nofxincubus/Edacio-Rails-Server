@@ -76,6 +76,13 @@ function initialize(){
 	liprof = new LIProfile();
 	selectedNode =0;
 	onEF();
+
+	$('#textArea').bind('keypress', function(e) {
+		var code = (e.keyCode ? e.keyCode : e.which);
+		if(code == 13) { //Enter keycode
+			addNotes();
+		}
+	});
 	mapui.drawAll(svg);
 		
 }
@@ -150,6 +157,8 @@ function onMD(e){
 	var xM = mouseX(e);
 	var yM = mouseY(e);
 	var ymHeight = mapui.height;
+	if (selectedNode != 0)
+		selectedNode.deSelect();
 	if (xM < 200 || xM > window.innerWidth-260){
 	} else {
 		selectedNode = mapui.SetDragged	(mouseX(e), mouseY(e));
@@ -384,6 +393,7 @@ function addNoteList(){
 		var lengthofList = $('#pastnotemenu li').length;
 		var menueleheight = $('#pastnotemenu li').height();
 		var mheight = parseInt( menueleheight * lengthofList);
+
 			
 		//Calculate the top value
 		//This equation is not the perfect, but it 's very close
@@ -391,7 +401,8 @@ function addNoteList(){
 		var top_value = Math.round(( (s_top - mouseY) /(100)) * mheight *0.5);
 		
 		//Animate the #menu by chaging the top value
-		$('#pastnotemenu').animate({top: top_value}, { queue:false, duration:500});
+		if (mheight > s_bottom)
+			$('#pastnotemenu').animate({top: top_value}, { queue:false, duration:500});
 	});
 	/////////////////////////
 }
@@ -556,16 +567,6 @@ function selectRecur() {
            	 }});
 }
 
-//// Don't scroll when its smaller
-//// Use linkedin button
-//// enter to post
-//// Edacio Reminders
-//// Recurring Calendar reminder
-//// divmenu change size on hover
-//// line to drag with the face
-//// Pop out to parent when every children is deleted
-//// Fix selection Error
-//// LIProfile to link to linkedin
-//// Calendar title
+
 //// Analytics
 //// Feedback

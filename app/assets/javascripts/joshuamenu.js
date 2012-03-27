@@ -18,7 +18,7 @@ function JoshuaMenu(w, h, x, y ){
 	this.frameDiv = document.getElementById("menulist");
 	this.ulDiv = document.getElementById("menulistul");
 	this.frameDiv.style.position = "absolute";
-	this.frameDiv.style.overflow = "hidden";
+	this.frameDiv.style.overflowX = "hidden";
 	this.frameDiv.style.width = this.width + "px";
 	this.frameDiv.style.height = this.height + "px";
 	this.frameDiv.style.top = this.y + "px";
@@ -121,7 +121,7 @@ JoshuaMenu.prototype.resetList = function() {
 		.animate( { paddingLeft: defpadLeft, paddingRight: defpadRight}, { queue:false, duration:100 } )
 		.animate( { backgroundColor: colorOut }, { queue:false, duration:200 });
 	});	
-	
+	/*
 	//Scroll the menu on mouse move above the #sidebar layer
 	$('#menulist').mousedown(function(e) {
 
@@ -181,6 +181,6 @@ JoshuaMenu.prototype.resetList = function() {
 		
 		
 		
-	});
+	});*/
 	/////////////////////////
 }

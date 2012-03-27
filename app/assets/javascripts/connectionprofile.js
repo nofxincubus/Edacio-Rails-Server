@@ -12,6 +12,7 @@ function connectionProfile(id,linkid, picURL, name, title, location, currentStat
 	this.location = location;
 	this.currentStatus = currentStatus;
 	this.publicURL = publicURL;
+
 	this.me = false;
 	////////////////////////
 	//if me is true
