@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120321213049) do
+ActiveRecord::Schema.define(:version => 20120326231509) do
 
   create_table "connections", :force => true do |t|
     t.string   "linkid"
@@ -23,8 +23,8 @@ ActiveRecord::Schema.define(:version => 20120321213049) do
     t.string   "linkurl"
     t.string   "status"
     t.string   "tags"
-    t.integer  "priority"
-    t.integer  "parent_id"
+    t.string   "priority"
+    t.string   "parent_id"
     t.string   "last_contacted"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
@@ -70,9 +70,11 @@ ActiveRecord::Schema.define(:version => 20120321213049) do
     t.string   "oauth_token"
     t.string   "oauth_secret"
     t.string   "linkid"
+    t.string   "google_oauth"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
+  add_index "users", ["google_oauth"], :name => "index_users_on_google_oauth"
   add_index "users", ["oauth_token"], :name => "index_users_on_oauth_token"
   add_index "users", ["remember_token"], :name => "index_users_on_remember_token"
 

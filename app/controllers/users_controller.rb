@@ -5,7 +5,8 @@ class UsersController < ApplicationController
 
 	def first
 		@user = current_user
-	end	
+	end
+		
 
   def show
     @user = User.find(params[:id])
@@ -49,8 +50,8 @@ class UsersController < ApplicationController
 			 end
 			@connections = Array.new
 			@user.connections.each do |k|
-			@connections.push([k.id,k.linkid,k.picurl,k.name,k.title,k.location,k.status,k.linkurl,k.tags,k.priority,k.parent_id])
-		end
+				@connections.push([k.id,k.linkid,k.picurl,k.name,k.title,k.location,k.status,k.linkurl,k.tags,k.priority,k.parent_id,k.updated_at])
+			end
 		#@notes  = current_user.notes.build if signed_in?
 		@notelist = @user.notes
   end

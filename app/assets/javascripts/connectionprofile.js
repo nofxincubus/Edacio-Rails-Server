@@ -20,13 +20,13 @@ function connectionProfile(id,linkid, picURL, name, title, location, currentStat
 	this.awards =0;
 	this.links = 0;
 	this.alerts=0;
-	this.lastConnected = 0;
+	this.lastConnected = "0 days";
 	this.lastViewed = 0;
 	////////////////////////
 	// 1. Stay Close
 	 // 2. Keep Track
 	//  3. Keep in touch
-	this.type = 1;
+	this.type = 999;
 	//add Notes and shit
 	this.notes = [];
 	this.permanantTag = "";
@@ -41,22 +41,6 @@ connectionProfile.prototype.setID = function(id){
 
 connectionProfile.prototype.appendNotes = function(notes){
 	this.notes.push(notes);
-}
-
-connectionProfile.prototype.checkLastView = function(){
-	var today = new Date();
-	if (this.lastViewed === 0){
-		this.lastViewed = new Date();
-		return true;
-	}
-	else 
-		timeDiff = Math.round(today.getTime() - this.lastViewed.getTime());
-	var comparison = 60*60*1000;
-	if (timeDiff >= comparison)
-		return true;
-	 else
-		return false
-	this.updateProfile();
 }
 
 connectionProfile.prototype.appendPermenantNotes = function(notes){
@@ -84,27 +68,19 @@ connectionProfile.prototype.getNextAppointment = function(){
 }
 
 connectionProfile.prototype.getNotify = function(){
-	var today = new Date();
-	var timeDiff;
-	if (this.lastConnected === 0)
-		timeDiff = 999999999999;
+	var x;
+	if (this.lastConnected.indexOf("day") > -1)
+		x = parseInt(this.lastConnected);
 	else
-		timeDiff = Math.round((today.getTime() - this.lastConnected.getTime()));
-	var comparison;
-	if (this.type === 1)
-		comparison = 7*24*60*60*1000*0.5;
-	else if (this.type === 2)
-		comparison = 7*24*60*60*1000;
-	else 
-		comparison = 7*24*60*60*1000*4;
-	if (timeDiff <= comparison)
+		x = 0;
+	if (x < this.type)
 		return false;
 	else
 		return true;
 }
 
 connectionProfile.prototype.updateTime = function(){
-	this.lastConnected = new Date();
+	
 }
 /*
 

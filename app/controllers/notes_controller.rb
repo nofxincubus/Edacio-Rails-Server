@@ -16,8 +16,8 @@ class NotesController < ApplicationController
   end
 
   def destroy
-		@note.destroy
-		render @note
+		@note.delete
+		render current_user.notes
   end
 
 	private

@@ -12,8 +12,7 @@ function LIProfile() {
 	this.locationTag = document.getElementById('linkLocation');
 	this.titleTag = document.getElementById('linkTitle');
 	this.oneTimeButton = document.getElementById('onetime');
-	this.recurringButton = document.getElementById('recurring');
-
+	this.recurSelect = document.getElementById('recurselect');
 	this.wrapdiv = document.getElementById('contactprofile');
 	this.wrapdiv.style.zIndex = 3;
 	this.wrapdiv.style.overflow = "hidden";
@@ -77,12 +76,11 @@ LIProfile.prototype.reposition = function(){
 	this.oneTimeButton.style.width = "123px";
 	this.oneTimeButton.style.height = "30px";
 
-	this.recurringButton.style.position = "absolute";
-	this.recurringButton.style.top = "1px";
-	this.recurringButton.style.left = "126px";
-	this.recurringButton.style.width = "123px";
-	this.recurringButton.style.height = "30px";
-
+	this.recurSelect.style.position = "absolute";
+	this.recurSelect.style.top = "1px";
+	this.recurSelect.style.left = "125px";
+	this.recurSelect.style.width = "123px";
+	this.recurSelect.style.height = "20px";
 
 }
 

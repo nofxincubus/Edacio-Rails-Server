@@ -1,8 +1,17 @@
 class ConnectionsController < ApplicationController
 	before_filter :signed_in_user
 
+	def update
+		@conn = current_user.connections.find(params[:id])
+		@conn.update_attributes(params[:connections])
+		@conn.touch
+		respond_to do |format|
+				format.json { render :json => { :response => @conn.priority,:time => @conn.updated_at }.to_json }
+			end
+	end
+
 	def create
-		@connection = current_user.connections.create!(params[:connection])		
+		@connection = current_user.connections.create!(params[:connection])
 		if @connection.save
 			respond_to do |format|
 				format.json { render :json => { :response => @connection.id }.to_json }
@@ -17,7 +26,9 @@ class ConnectionsController < ApplicationController
 	def destroy
 		@connection = current_user.connections.find(params[:id])
 		@notes = current_user.notes.find_by_connection_id(@connection.id)
-		@notes.destroy
+		if !@notes.nil?
+			@notes.destroy
+		end
 		@connection.destroy
 		respond_to do |format|
 			format.json { render :json => { :response => "deleted" }.to_json }

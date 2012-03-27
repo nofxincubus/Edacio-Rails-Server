@@ -105,6 +105,23 @@ function displayConnectionInfo(){
 				//textArea.value = "";
 				//textArea.focus();
 				textTitle.textContent = "Notes about " + selectedNode.profile.name;
+				el('option6').selected = "selected";
+				if (selectedNode.profile.priority === 999)
+					el('option6').selected = "selected";
+				else if (selectedNode.profile.priority === 1)
+					el('option1').selected = "selected";
+				else if (selectedNode.profile.priority === 7)
+					el('option2').selected = "selected";
+				else if (selectedNode.profile.priority === 14)
+					el('option3').selected = "selected";
+				else if (selectedNode.profile.priority === 30)
+					el('option4').selected = "selected";
+				else if (selectedNode.profile.priority === 90)
+					el('option5').selected = "selected";
+				else if (selectedNode.profile.priority === 182)
+					el('option6').selected = "selected";
+				var rateSelector = el('selectrate');
+				rateSelector.selected = selectedNode.profile.type;
 				plugging();
 				liprof.setConnections(selectedNode.profile);
 				actionitem.draw();
@@ -133,7 +150,7 @@ function onMD(e){
 	var xM = mouseX(e);
 	var yM = mouseY(e);
 	var ymHeight = mapui.height;
-	if (selectedNode != 0 && xM > window.innerWidth-260){
+	if (xM < 200 || xM > window.innerWidth-260){
 	} else {
 		selectedNode = mapui.SetDragged	(mouseX(e), mouseY(e));
 		var liArray = $("#pastnotemenu li");
@@ -322,7 +339,7 @@ function addNotes(){
 }
 
 function addNoteList(){
-	
+		
 	
 		//jquerystuff ///////////////
 		//Background color, mouseover and mouseout
@@ -402,6 +419,10 @@ function coffeeEvent(){
 		app = new Appointment("Coffee", selectedNode, true);
 		selectedNode.updateTime();
 		mapui.drawAll(svg);
+		$.ajax({type:"PUT",url:'/connections/' + selectedNode.profile.id, dataType: "json", data: 
+							  {'connections':{}}, 
+								success: function(resp) {
+           	 }});
 		plugging();
 	}
 }
@@ -416,6 +437,10 @@ function lunchEvent(){
 		app = new Appointment("Lunch", selectedNode, true);
 		selectedNode.updateTime();
 		mapui.drawAll(svg);
+		$.ajax({type:"PUT",url:'/connections/' + selectedNode.profile.id, dataType: "json", data: 
+							  {'connections':{}}, 
+								success: function(resp) {
+           	 }});
 		plugging();
 	}
 }
@@ -430,6 +455,10 @@ function textEvent(){
 		app = new Appointment("Text Message", selectedNode, true);
 		selectedNode.updateTime();
 		mapui.drawAll(svg);
+		$.ajax({type:"PUT",url:'/connections/' + selectedNode.profile.id, dataType: "json", data: 
+							  {'connections':{}}, 
+								success: function(resp) {
+           	 }});
 		plugging();
 	}
 }
@@ -444,6 +473,10 @@ function callEvent(){
 		app = new Appointment("Phone Call", selectedNode, true);
 		selectedNode.updateTime();
 		mapui.drawAll(svg);
+		$.ajax({type:"PUT",url:'/connections/' + selectedNode.profile.id, dataType: "json", data: 
+							  {'connections':{}}, 
+								success: function(resp) {
+           	 }});
 		plugging();
 	}
 }
@@ -458,6 +491,11 @@ function emailEvent(){
 		app = new Appointment("Email", selectedNode, true);
 		selectedNode.updateTime();
 		mapui.drawAll(svg);
+		$.ajax({type:"PUT",url:'/connections/' + selectedNode.profile.id, dataType: "json", data: 
+							  {'connections':{}}, 
+								success: function(resp) {
+									
+           	 }});
 		plugging();
 	}
 }
@@ -472,6 +510,11 @@ function meetingEvent(){
 	app = new Appointment("Meeting", selectedNode, true);
 	selectedNode.updateTime();
 	mapui.drawAll(svg);
+	$.ajax({type:"PUT",url:'/connections/' + selectedNode.profile.id, dataType: "json", data: 
+							  {'connections':{}}, 
+								success: function(resp) {
+									
+           	 }});
 	plugging();
 	}
 }
@@ -491,13 +534,7 @@ function addCommas(nStr)
 
 function plugging() {
 	if (selectedNode != mapui.topFocus){
-			if (selectedNode.profile.lastConnected === 0)
-				document.getElementById("plugdesc").textContent = "Never!"
-			else{
-				var today = new Date();
-				var dayz = parseInt((today.UTC-selectedNode.profile.lastConnected.getTime())/86400000);
-				document.getElementById("plugdesc").textContent = dayz + " days since you connected.";
-			}
+		document.getElementById("plugdesc").textContent = "Last interacted : " + selectedNode.profile.lastConnected + " ago."
 	}
 }
 
@@ -510,3 +547,11 @@ function setPriority(type) {
 		}
 }
 
+function selectRecur() {
+	var select = el('selectrate');
+	$.ajax({type:"PUT",url:'/connections/' + selectedNode.profile.id, dataType: "json", data: 
+							  {'connections':{'priority':select.value}}, 
+								success: function(resp) {
+									selectedNode.profile.priority = parseInt(resp['response']);
+           	 }});
+}

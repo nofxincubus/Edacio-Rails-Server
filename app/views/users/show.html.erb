@@ -17,7 +17,7 @@
 <div id="rightMenu">
 	<!-- plug visual -->
 	<div id="plugview">
-		<h4 id = "plugdesc" class = "whitetext"></h4>
+		<h4 id = "plugdesc" class = "greytext"></h4>
 	</div>
 
 	<!-- linkedin contact profile -->
@@ -28,8 +28,17 @@
 		<h3 id="linkLocation" class = "whitetext"></h3>
 	</div>
 	<div id="contactreminder">
-		<button id = "onetime" class = "selectbtn" onclick = "setPriority(1)">One Time</button>
-		<button id = "recurring" class = "selectbtn" onclick = "setPriority(2)">Recurring</button>
+		<button id = "onetime" class = "selectbtn" onclick = "setPriority(1)">Recurring</button>
+		<form action="" id = "recurselect">
+		<select name="Recurring Rate" onchange = "selectRecur()" id = "selectrate">
+			<option value=1 id = "option1">Daily</option>
+			<option value=7 id = "option2">Weekly</option>
+			<option value=14 id = "option3">Biweekly</option>
+			<option value=30 id = "option4">Monthly</option>
+			<option value=90 id = "option5">3 Months</option>
+			<option value=182 id = "option6">6 Months</option>
+		</select>
+		</form>
 	</div>
 	<div id="contactaction">
 	</div>
@@ -95,10 +104,12 @@
 	var z;
 	var foci;
 	var paraFoci;
+	var datetime = new Date();
 	<% @connections.each do |b| %>
 			z = new connectionProfile(<%= b[0] %>,"<%= b[1] %>","<%= b[2] %>","<%= b[3] %>","<%= b[4] %>","<%= b[5] %>","<%= b[6] %>","<%= b[7] %>");
 			z.tag = "<%= b[8] %>";
 			z.priority = <%= b[9] %>;
+			z.lastConnected = "<%= time_ago_in_words(b[11]) %>";
 			if (<%= b[10] %> == 0){
 				foci = new Focus(z,mapui.topFocus);
 				mapui.topFocus.children.push(foci);
@@ -109,6 +120,7 @@
 			}
 	<% end %>
 	mapui.drawAll(svg);
+
 <% end %>
 
 	
