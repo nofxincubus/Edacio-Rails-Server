@@ -114,7 +114,7 @@ function displayConnectionInfo(){
 				textTitle.textContent = "Notes about " + selectedNode.profile.name;
 				el('option6').selected = "selected";
 				if (selectedNode.profile.priority === 999)
-					el('option6').selected = "selected";
+					el('option7').selected = "selected";
 				else if (selectedNode.profile.priority === 1)
 					el('option1').selected = "selected";
 				else if (selectedNode.profile.priority === 7)
@@ -566,12 +566,6 @@ function selectRecur() {
 									selectedNode.profile.priority = parseInt(resp['response']);
            	 }});
 }
-
-//// Create custom categories
-//// Build your network
-//// Add recurring reminders
-//// Schedule meetings
-//// Write private notes
 
 function settutorial() {
 	if (mapui.tutorial)
