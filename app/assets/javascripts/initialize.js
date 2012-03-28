@@ -567,4 +567,17 @@ function selectRecur() {
            	 }});
 }
 
+//// Create custom categories
+//// Build your network
+//// Add recurring reminders
+//// Schedule meetings
+//// Write private notes
+
+function settutorial() {
+	if (mapui.tutorial)
+		mapui.tutorial = false;
+	else
+		mapui.tutorial = true;
+	mapui.drawAll(svg);
+}
 

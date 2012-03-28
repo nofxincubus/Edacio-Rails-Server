@@ -3,8 +3,9 @@
 
 
 <!-- User Profile -->
+<div onclick='settutorial()' style='position:absolute;top:45px;right:280px;background:#222;z-index:5;color:#fff;cursor:pointer;'>Help!</div>
 <div id='profile'>
-	<%= user_profile_for @profile.picurl %>
+	<%= user_profile_for @profile %>
 	<h3 id="profilename"> <%= @profile.name %></h1>
 	<div id="alertCounter" style="opacity:0">
 		<p id="alertCounterText"><p>
@@ -22,7 +23,7 @@
 
 	<!-- linkedin contact profile -->
 	<div id="contactprofile">
-		<a href="" id = "linkImageA"><img id="linkImage" src="/assets/tempme.png"/></a>
+		<a href="" id = "linkImageA" target = "_blank"><img id="linkImage" src="/assets/tempme.png"/></a>
 		<h3 id="linkName" class = "whitetext"></h3>
 		<h3 id="linkTitle" class = "whitetext"></h3>
 		<h3 id="linkLocation" class = "whitetext"></h3>

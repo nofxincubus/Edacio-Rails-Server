@@ -23,6 +23,37 @@ function MapUI(w, h,csvg){
 	this.dragged = false;
 	this.lines =[];
 	this.doCircle = false;
+	this.tutorial = true;
+	this.xlinkns = "http://www.w3.org/1999/xlink";
+	//Tutorial stuff
+	this.tutpic1 = document.createElementNS("http://www.w3.org/2000/svg", 'image');
+	this.tutpic1.setAttributeNS(this.xlinkns, 'xlink:href', "/assets/buildyournetwork.png");
+	this.tutpic1.setAttribute('width',200);
+	this.tutpic1.setAttribute('height',100);	
+	this.tutpic1.setAttribute('x',200);
+	this.tutpic1.setAttribute('y',this.centery);
+	this.tutpic1.setAttribute("opacity",1);
+	this.tutpic2 = document.createElementNS("http://www.w3.org/2000/svg", 'image');
+	this.tutpic2.setAttributeNS(this.xlinkns, 'xlink:href', "/assets/AddCustomCategories.png");
+	this.tutpic2.setAttribute('width',200);
+	this.tutpic2.setAttribute('height',100);	
+	this.tutpic2.setAttribute('x',300);
+	this.tutpic2.setAttribute('y',20);
+	this.tutpic2.setAttribute("opacity",1);
+	this.tutpic3 = document.createElementNS("http://www.w3.org/2000/svg", 'image');
+	this.tutpic3.setAttributeNS(this.xlinkns, 'xlink:href', "/assets/SetupRecurringNotifications.png");
+	this.tutpic3.setAttribute('width',200);
+	this.tutpic3.setAttribute('height',100);	
+	this.tutpic3.setAttribute('x',w-250-220);
+	this.tutpic3.setAttribute('y',100);
+	this.tutpic3.setAttribute("opacity",1);
+	this.tutpic4 = document.createElementNS("http://www.w3.org/2000/svg", 'image');
+	this.tutpic4.setAttributeNS(this.xlinkns, 'xlink:href', "/assets/AddPrivateNotes.png");
+	this.tutpic4.setAttribute('width',200);
+	this.tutpic4.setAttribute('height',100);
+	this.tutpic4.setAttribute('x',w-250-220);
+	this.tutpic4.setAttribute('y',this.centery+100);
+	this.tutpic4.setAttribute("opacity",1);
 
 	this.menu = new JoshuaMenu(200,window.innerHeight-40,0,40);
 	this.oldmenu = new DivMenu(window.innerWidth-250,30,40,200);
@@ -104,35 +135,44 @@ MapUI.prototype.drawAll = function(svg) {
 	this.removeAll(svg);
 	
 	this.reposition();
-
+	
 	//Add the circle or lines
 	if (this.doCircle)
-		this.svg.appendChild(this.mainCircle);
+		svg.appendChild(this.mainCircle);
 	else {
 		for (var i = 0;i < this.lines.length;i ++)
-			this.svg.appendChild(this.lines[i]);
+			svg.appendChild(this.lines[i]);
 	}
 
 	if (this.currentFocus.parent != 0)
 	{
-		this.svg.appendChild(this.parentLine);
-		this.svg.appendChild(this.currentFocus.parent.getPoint());
+		svg.appendChild(this.parentLine);
+		svg.appendChild(this.currentFocus.parent.getPoint());
 	}
 	var i = 0;
 	this.currentFocus.dragOut();
-	this.svg.appendChild(this.currentFocus.getPoint());
+	svg.appendChild(this.currentFocus.getPoint());
 	while (i < this.currentFocus.children.length){
 		this.currentFocus.children[i].dragOver();
-		this.svg.appendChild(this.currentFocus.children[i].getPoint());
+		svg.appendChild(this.currentFocus.children[i].getPoint());
 		i++;
 	}
+	if (this.tutorial){
+		svg.appendChild(this.tutpic1);
+		svg.appendChild(this.tutpic2);
+		svg.appendChild(this.tutpic3);
+		svg.appendChild(this.tutpic4);
+	}
+	
 };
 
 //Reve the MAP UI
 MapUI.prototype.removeAll = function(svg) {
-	while (this.svg.childNodes.length > 0 ){
-		this.svg.removeChild(svg.firstChild);
+	var thresh = 0;
+	while (svg.childNodes.length > thresh ){
+		svg.removeChild(svg.firstChild);
 	}
+	
 };
 
 
@@ -167,16 +207,15 @@ MapUI.prototype.reposition = function() {
 		var parentX = this.centerx - this.circleRadius*0.8;
 		var parentY = this.centery - this.circleRadius*0.8;
 		this.currentFocus.parent.setXY(parentX, parentY);
-		var line = document.createElementNS("http://www.w3.org/2000/svg", 'line');
-		line.setAttribute("stroke", "#9966FF");
-		line.setAttribute("fill", "none");
-		line.setAttribute("stroke-width", "3");
-		line.setAttribute('opacity',"1");
-		line.setAttribute('x1',this.centerx);
-		line.setAttribute('y1',this.centery);
-		line.setAttribute('x2',parentX);
-		line.setAttribute('y2',parentY);
-		this.parentLine = line;
+		this.parentLine = document.createElementNS("http://www.w3.org/2000/svg", 'line');
+		this.parentLine.setAttribute("stroke", "#9966FF");
+		this.parentLine.setAttribute("fill", "none");
+		this.parentLine.setAttribute("stroke-width", "3");
+		this.parentLine.setAttribute('opacity',"1");
+		this.parentLine.setAttribute('x1',this.centerx);
+		this.parentLine.setAttribute('y1',this.centery);
+		this.parentLine.setAttribute('x2',parentX);
+		this.parentLine.setAttribute('y2',parentY);
 	}
 
 	var mpi = Math.PI/180;
@@ -482,5 +521,14 @@ MapUI.prototype.dropNode = function(b,a, selected, firstindex){
 			}
 		}
 }
+
+MapUI.prototype.setTutorial = function() {
+	
+	
+
+	
+
+}
+
 
 
