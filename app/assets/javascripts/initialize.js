@@ -108,6 +108,12 @@ function displayConnectionInfo(){
 			if (selectedNode !== mapui.topFocus){
 				addNoteList();
 				var textTitle = document.getElementById('contacttitle');
+				var liArray = $("#pastnotemenu li");
+				for (var i = 0;i < liArray.length;i++)
+				if (parseInt(liArray[i].id) === selectedNode.profile.id)
+					liArray[i].style.display = "block"
+				else
+					liArray[i].style.display = "none";
 				//var textArea = el('contacttextarea');
 				//textArea.value = "";
 				//textArea.focus();
@@ -167,11 +173,7 @@ function onMD(e){
 			selectedNode.isSelected();
 			// for Form
 			//el('conID').value = selectedNode.profile.id;
-			for (var i = 0;i < liArray.length;i++)
-				if (parseInt(liArray[i].id) === selectedNode.profile.id)
-					liArray[i].style.display = "block"
-				else
-					liArray[i].style.display = "none";
+			
 					
 			displayConnectionInfo();
 		} else {
