@@ -413,6 +413,7 @@ MapUI.prototype.SetDragged=function(b,a){
 			this.selectedNode.deSelect();
 			this.selectedNode = 0;
 			}
+		this.dragged = false;
 	}
 	this.drawAll(this.svg);
 	return this.selectedNode;
@@ -440,7 +441,7 @@ MapUI.prototype.StopDragging=function(b,a){
 					return true;
 				}
 		} else {
-			for (var i = 0;i < this.currentFocus.children.length;i++)
+			/*for (var i = 0;i < this.currentFocus.children.length;i++)
 				if (this.currentFocus.children[i] === this.selectedNode){
 					var tNT = this.topNodeTest(b,a);
 					if (tNT != -1 && tNT != i) {
@@ -449,12 +450,11 @@ MapUI.prototype.StopDragging=function(b,a){
 							this.currentFocus.children.splice(i,1);
 					}
 					else {
-						break;
 					}
 				}		
 			
 			this.selectedNode.setXY(this.startDragX,this.startDragY);
-			this.dragged = false;
+			this.dragged = false;*/
 			return false;
 		}	
 	}

@@ -206,9 +206,10 @@ function onMU(e){
 			// Animation complete.
 			});
 		}
-		mapui.drawAll(svg);
-	} else
-		mapui.drawAll(svg);
+		
+	} 
+	mapui.drawAll(svg);
+	mapui.dragged = false;
 }
 
 function mouseX(e)

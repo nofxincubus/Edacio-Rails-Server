@@ -27,6 +27,7 @@ function Focus (profile, parent){
 	this.point.setAttributeNS(this.xlinkns, 'xlink:href', this.profile.picURL);
 	this.point.setAttribute("width", this.width);
 	this.point.setAttribute("height", this.height);
+	this.point.setAttribute("draggable", "true");
 	
 	this.notification = document.createElementNS("http://www.w3.org/2000/svg", 'image');
 	this.notification.setAttributeNS(this.xlinkns, 'xlink:href', "/assets/notification.png");
@@ -61,9 +62,9 @@ function Focus (profile, parent){
 	this.circAnimate = false;
 
 	this.group.appendChild(this.circ);
-	this.group.appendChild(this.point);
 	this.group.appendChild(this.nameText);
 	this.group.appendChild(this.circOver);
+	this.group.appendChild(this.point);
 	this.group.appendChild(this.notification);
 	
 	this.group.setAttribute('style','z-index:0');
