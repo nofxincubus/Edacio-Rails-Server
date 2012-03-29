@@ -28,16 +28,16 @@ function MapUI(w, h,csvg){
 	//Tutorial stuff
 	this.tutpic1 = document.createElementNS("http://www.w3.org/2000/svg", 'image');
 	this.tutpic1.setAttributeNS(this.xlinkns, 'xlink:href', "/assets/buildyournetwork.png");
-	this.tutpic1.setAttribute('width',200);
-	this.tutpic1.setAttribute('height',100);	
-	this.tutpic1.setAttribute('x',200);
-	this.tutpic1.setAttribute('y',this.centery);
+	this.tutpic1.setAttribute('width',400);
+	this.tutpic1.setAttribute('height',130);	
+	this.tutpic1.setAttribute('x',170);
+	this.tutpic1.setAttribute('y',this.centery-100);
 	this.tutpic1.setAttribute("opacity",1);
 	this.tutpic2 = document.createElementNS("http://www.w3.org/2000/svg", 'image');
 	this.tutpic2.setAttributeNS(this.xlinkns, 'xlink:href', "/assets/AddCustomCategories.png");
-	this.tutpic2.setAttribute('width',200);
-	this.tutpic2.setAttribute('height',100);	
-	this.tutpic2.setAttribute('x',300);
+	this.tutpic2.setAttribute('width',265);
+	this.tutpic2.setAttribute('height',265);
+	this.tutpic2.setAttribute('x',350);
 	this.tutpic2.setAttribute('y',20);
 	this.tutpic2.setAttribute("opacity",1);
 	this.tutpic3 = document.createElementNS("http://www.w3.org/2000/svg", 'image');
@@ -46,18 +46,42 @@ function MapUI(w, h,csvg){
 	this.tutpic3.setAttribute('height',100);	
 	this.tutpic3.setAttribute('x',w-250-220);
 	this.tutpic3.setAttribute('y',100);
-	this.tutpic3.setAttribute("opacity",1);
+	this.tutpic3.setAttribute("opacity",0);
 	this.tutpic4 = document.createElementNS("http://www.w3.org/2000/svg", 'image');
 	this.tutpic4.setAttributeNS(this.xlinkns, 'xlink:href', "/assets/AddPrivateNotes.png");
 	this.tutpic4.setAttribute('width',200);
 	this.tutpic4.setAttribute('height',100);
 	this.tutpic4.setAttribute('x',w-250-220);
-	this.tutpic4.setAttribute('y',this.centery+100);
-	this.tutpic4.setAttribute("opacity",1);
+	this.tutpic4.setAttribute('y',185);
+	this.tutpic4.setAttribute("opacity",0);
 
-	this.menu = new JoshuaMenu(200,window.innerHeight-40,0,40);
+	this.menu = new JoshuaMenu(200,window.innerHeight-55,0,40);
 	this.oldmenu = new DivMenu(window.innerWidth-250,30,40,200);
-};
+}
+
+MapUI.prototype.drawTutorial = function(svg){
+	if (this.tutorial){
+		svg.appendChild(this.tutpic1);
+		svg.appendChild(this.tutpic2);
+		svg.appendChild(this.tutpic3);
+		svg.appendChild(this.tutpic4);
+	}
+}
+
+MapUI.prototype.setTutorial = function(){
+	if (this.tutorial){
+		this.tutpic1.setAttribute("opacity",0);
+		this.tutpic2.setAttribute("opacity",0);
+		this.tutpic3.setAttribute("opacity",0);
+		this.tutpic4.setAttribute("opacity",0);
+	} else {
+		this.tutpic1.setAttribute("opacity",1);
+		this.tutpic2.setAttribute("opacity",1);
+		this.tutpic3.setAttribute("opacity",1);
+		this.tutpic4.setAttribute("opacity",1);
+	}
+}
+
 
 MapUI.prototype.increaseSize = function(){
 	this.sizeConstraint +=0.005;
@@ -69,6 +93,7 @@ MapUI.prototype.increaseSize = function(){
 	//this.topFocus.increaseSize();
 	this.drawAll();
 }
+
 MapUI.prototype.decreaseSize = function(){
 	this.sizeConstraint -=0.005;
 	this.width -= 5;
@@ -135,7 +160,15 @@ MapUI.prototype.drawAll = function(svg) {
 	this.removeAll(svg);
 	
 	this.reposition();
-	
+	if (this.tutorial){
+		if (selectedNode != 0){
+			this.tutpic3.setAttribute("opacity",1);
+			this.tutpic4.setAttribute("opacity",1);
+		} else {
+			this.tutpic3.setAttribute("opacity",0);
+			this.tutpic4.setAttribute("opacity",0);
+		}
+	}	
 	//Add the circle or lines
 	if (this.doCircle)
 		svg.appendChild(this.mainCircle);
@@ -157,20 +190,14 @@ MapUI.prototype.drawAll = function(svg) {
 		svg.appendChild(this.currentFocus.children[i].getPoint());
 		i++;
 	}
-	if (this.tutorial){
-		svg.appendChild(this.tutpic1);
-		svg.appendChild(this.tutpic2);
-		svg.appendChild(this.tutpic3);
-		svg.appendChild(this.tutpic4);
-	}
 	
 };
 
 //Reve the MAP UI
 MapUI.prototype.removeAll = function(svg) {
-	var thresh = 0;
+	var thresh = 5;
 	while (svg.childNodes.length > thresh ){
-		svg.removeChild(svg.firstChild);
+		svg.removeChild(svg.lastChild);
 	}
 	
 };
@@ -293,7 +320,7 @@ MapUI.prototype.zoomIterate=function(){
 	return this.stable;
 	}
 	*/
-};
+}
 
 MapUI.prototype.spinIterate=function(){
 	if(this.stable)
@@ -413,6 +440,19 @@ MapUI.prototype.StopDragging=function(b,a){
 					return true;
 				}
 		} else {
+			for (var i = 0;i < this.currentFocus.children.length;i++)
+				if (this.currentFocus.children[i] === this.selectedNode){
+					var tNT = this.topNodeTest(b,a);
+					if (tNT != -1 && tNT != i) {
+							this.selectedNode.parent = this.currentFocus.children[tNT];
+							this.currentFocus.children[tNT].children.push(this.selectedNode)
+							this.currentFocus.children.splice(i,1);
+					}
+					else {
+						break;
+					}
+				}		
+			
 			this.selectedNode.setXY(this.startDragX,this.startDragY);
 			this.dragged = false;
 			return false;
@@ -522,13 +562,7 @@ MapUI.prototype.dropNode = function(b,a, selected, firstindex){
 		}
 }
 
-MapUI.prototype.setTutorial = function() {
-	
-	
 
-	
-
-}
 
 
 

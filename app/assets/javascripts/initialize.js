@@ -83,6 +83,7 @@ function initialize(){
 			addNotes();
 		}
 	});
+	mapui.drawTutorial(svg);
 	mapui.drawAll(svg);
 		
 }
@@ -148,6 +149,7 @@ function displayConnectionInfo(){
 				} 
 			} else {
 					selectedNode.deSelect();
+					selectedNode = 0;
 					if (document.getElementById('rightMenu').style.opacity > 0){
 						$('#rightMenu').animate({
 						opacity: 0,
@@ -297,6 +299,7 @@ function drop(event){
 	event.preventDefault();
 	//do shit to drop here
 }
+
 function allowDrop(event)
 {
 	event.preventDefault();
@@ -329,6 +332,7 @@ function addNotes(){
 								"content":textArea.value}},
 								success: function(html) {
 									$("#pastnotemenu").append(html);
+								
             }});
 			
 			/*
@@ -570,9 +574,10 @@ function selectRecur() {
 }
 
 function settutorial() {
+	mapui.setTutorial();
 	if (mapui.tutorial)
 		mapui.tutorial = false;
-	else
+	else 
 		mapui.tutorial = true;
 	mapui.drawAll(svg);
 }
