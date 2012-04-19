@@ -458,7 +458,6 @@ MapUI.prototype.StopDragging=function(b,a){
 							$.ajax({type:"PUT",url:'/connections/' + this.selectedNode.profile.id, dataType: "json", data: 
 							  {'connections':{'parent_id':this.currentFocus.children[tNT].profile.id}}, 
 								success: function(resp) {
-									alert("worked");
            	 			}});
 							this.currentFocus.children.splice(i,1);
 					}
@@ -470,7 +469,6 @@ MapUI.prototype.StopDragging=function(b,a){
 							$.ajax({type:"PUT",url:'/connections/' + this.selectedNode.profile.id, dataType: "json", data: 
 							  {'connections':{'parent_id':this.currentFocus.parent.profile.id}}, 
 								success: function(resp) {
-									alert("worked");
            	 			}});
 							this.currentFocus.children.splice(i,1);
 							if (this.currentFocus.children.length === 0)
