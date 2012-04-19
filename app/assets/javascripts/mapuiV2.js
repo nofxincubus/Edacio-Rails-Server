@@ -355,6 +355,13 @@ MapUI.prototype.topNodeTest = function(a,b) {
 	return -1;
 }
 
+MapUI.prototype.moveNodeTest = function(a,b) {
+	for (var i = 0;i < this.currentFocus.children.length;i++)
+		if (this.currentFocus.children[i].distance(a,b) < this.currentFocus.width*1.2 && this.currentFocus.children[i] != selectedNode)
+			return i;
+	return -1;
+}
+
 MapUI.prototype.parentTest = function(a,b) {
 	if (this.currentFocus.parent != 0){
 		if (this.currentFocus.parent.distance(a,b) < this.currentFocus.width*1.2) {
@@ -441,20 +448,39 @@ MapUI.prototype.StopDragging=function(b,a){
 					return true;
 				}
 		} else {
-			/*for (var i = 0;i < this.currentFocus.children.length;i++)
+			for (var i = 0;i < this.currentFocus.children.length;i++)
 				if (this.currentFocus.children[i] === this.selectedNode){
-					var tNT = this.topNodeTest(b,a);
+					var tNT = this.moveNodeTest(b,a);
 					if (tNT != -1 && tNT != i) {
 							this.selectedNode.parent = this.currentFocus.children[tNT];
 							this.currentFocus.children[tNT].children.push(this.selectedNode)
+							
+							$.ajax({type:"PUT",url:'/connections/' + this.selectedNode.profile.id, dataType: "json", data: 
+							  {'connections':{'parent_id':this.currentFocus.children[tNT].profile.id}}, 
+								success: function(resp) {
+									alert("worked");
+           	 			}});
 							this.currentFocus.children.splice(i,1);
 					}
 					else {
+						if (this.parentTest(b,a)){
+							this.selectedNode.parent = this.currentFocus.parent;
+							this.currentFocus.parent.children.push(this.selectedNode)
+							
+							$.ajax({type:"PUT",url:'/connections/' + this.selectedNode.profile.id, dataType: "json", data: 
+							  {'connections':{'parent_id':this.currentFocus.parent.profile.id}}, 
+								success: function(resp) {
+									alert("worked");
+           	 			}});
+							this.currentFocus.children.splice(i,1);
+							if (this.currentFocus.children.length === 0)
+								this.currentFocus = this.currentFocus.parent;
+						}
 					}
 				}		
 			
 			this.selectedNode.setXY(this.startDragX,this.startDragY);
-			this.dragged = false;*/
+			this.dragged = false;
 			return false;
 		}	
 	}

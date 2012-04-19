@@ -21,6 +21,7 @@ function ActionItem() {
 	this.email.style.zIndex = "10";
 	this.email.style.left = leftoffset + "px";
 	this.email.style.top = topoffset + "px";
+	this.email.style.cursor = "pointer";
 
 	this.call = document.createElement('img');
 	this.call.setAttribute('src',"/assets/phonecall.png");
@@ -31,6 +32,7 @@ function ActionItem() {
 	this.call.style.zIndex = "10";
 	this.call.style.left = leftoffset*2 + this.iconSize + "px";
 	this.call.style.top = topoffset + "px";
+	this.call.style.cursor = "pointer";
 
 	this.txt = document.createElement('img');
 	this.txt.setAttribute('src',"/assets/textmsg.png");
@@ -41,6 +43,7 @@ function ActionItem() {
 	this.txt.style.zIndex = "10";
 	this.txt.style.left = leftoffset*3 + this.iconSize*2 + "px";
 	this.txt.style.top = topoffset + "px";
+	this.txt.style.cursor = "pointer";
 
 	this.lunch = document.createElement('img');
 	this.lunch.setAttribute('src',"/assets/lunch.png");
@@ -49,6 +52,7 @@ function ActionItem() {
 	this.lunch.style.width = this.iconSize + "px";
 	this.lunch.style.height = this.iconSize + "px";
 	this.lunch.style.zIndex = "inherit";
+	this.lunch.style.cursor = "pointer";
 	this.lunch.style.left = leftoffset*4 + this.iconSize*3 + "px";
 	this.lunch.style.top = topoffset + "px";
 	
@@ -61,6 +65,7 @@ function ActionItem() {
 	this.coffee.style.zIndex = "inherit";
 	this.coffee.style.left = leftoffset*5 + this.iconSize*4 + "px";
 	this.coffee.style.top = topoffset + "px";
+	this.coffee.style.cursor = "pointer";
 	
 	this.meeting = document.createElement('img');
 	this.meeting.setAttribute('src',"/assets/meeting.png");
@@ -71,6 +76,7 @@ function ActionItem() {
 	this.meeting.style.zIndex = "inherit";
 	this.meeting.style.left = leftoffset*6+ this.iconSize*5 + "px";
 	this.meeting.style.top = topoffset + "px";
+	this.meeting.style.cursor = "pointer";
 	
 	this.div.appendChild(this.email);
 	this.div.appendChild(this.call);

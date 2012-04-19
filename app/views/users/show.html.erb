@@ -29,7 +29,7 @@
 		<h3 id="linkLocation" class = "whitetext"></h3>
 	</div>
 	<div id="contactreminder">
-		<button id = "onetime" class = "selectbtn" onclick = "setPriority(1)">Recurring</button>
+		<div id = "onetime" class = "selectbtn"></div>
 		<form action="" id = "recurselect">
 		<select name="Recurring Rate" onchange = "selectRecur()" id = "selectrate">
 			<option value=1 id = "option1">Daily</option>
@@ -99,7 +99,8 @@
 	mapui.menu.addLinked(linnnk);
 	
 	//Load links
-	var profileList = [];
+	profileList = [];
+	parentList = [];
 	var z;
 	var foci;
 	var paraFoci;
@@ -109,17 +110,11 @@
 			z.tag = "<%= b[8] %>";
 			z.priority = <%= b[9] %>;
 			z.lastConnected = "<%= time_ago_in_words(b[11]) %>";
-			if (<%= b[10] %> == 0){
-				foci = new Focus(z,mapui.topFocus);
-				mapui.topFocus.children.push(foci);
-			}else {
-				paraFoci = mapui.topFocus.returnMatchFocus(<%= b[10] %>)
-				foci = new Focus(z,paraFoci);
-				paraFoci.children.push(foci);
-			}
+			profileList.push(z);
+			parentList.push(<%= b[10] %>);
 	<% end %>
+	distributeList();
 	mapui.drawAll(svg);
-
 <% end %>
 
 	

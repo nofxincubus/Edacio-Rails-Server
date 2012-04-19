@@ -4,7 +4,6 @@ class ConnectionsController < ApplicationController
 	def update
 		@conn = current_user.connections.find(params[:id])
 		@conn.update_attributes(params[:connections])
-		@conn.touch
 		respond_to do |format|
 				format.json { render :json => { :response => @conn.priority,:time => @conn.updated_at }.to_json }
 			end

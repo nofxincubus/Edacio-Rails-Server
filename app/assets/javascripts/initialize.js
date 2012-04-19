@@ -583,3 +583,29 @@ function settutorial() {
 	mapui.drawAll(svg);
 }
 
+function distributeList() {
+	var parentDone;
+	var layer = 0;
+	var parentFocus = mapui.topFocus;
+	while (profileList.length > 0){
+		var i = 0;
+		while (i < profileList.length) {
+			if (parentList[i] == 0){
+				foc = new Focus(profileList[i],mapui.topFocus);
+				profileList.splice(i,1);
+				parentList.splice(i,1);
+				parentFocus.children.push(foc);
+			} else {
+				var getMatchingFocus = parentFocus.returnMatchFocus(parentList[i]);
+				if (getMatchingFocus != -1){
+					foc = new Focus(profileList[i],getMatchingFocus);
+					profileList.splice(i,1);
+					parentList.splice(i,1);
+					getMatchingFocus.children.push(foc);
+				}
+			}
+			i++;
+		}
+	}
+}
+

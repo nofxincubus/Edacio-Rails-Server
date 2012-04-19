@@ -292,9 +292,11 @@ Focus.prototype.returnMatchFocus = function(id){
 	if (this.profile.id === id)
 		x = this;
 	else {
-		for (var i = 0;i < this.children.length;i++)
-			if (this.children[i].returnMatchFocus(id) != -1)
-				x = this.children[i];
+		for (var i = 0;i < this.children.length;i++){
+			var bo = this.children[i].returnMatchFocus(id);
+			if (bo != -1)
+				x = bo;
+			}
 	}
 	if (x === -1)
 		return -1;
